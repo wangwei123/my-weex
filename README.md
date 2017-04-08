@@ -1,6 +1,6 @@
 ## weex-vue
 fork自weexframe，将weex官方的.we组件修改为.vue组件，并开发了一些其他组件.
-> 官方组件支持：
+###官方组件支持：
 1. wx-button
 2. wx-countdown
 3. wx-hn
@@ -13,7 +13,7 @@ fork自weexframe，将weex官方的.we组件修改为.vue组件，并开发了�
 10. wx-tabitem
 11. wx-tip
 
-新开发的组件：
+###新开发的组件：
 1. wx-tab
 2. wx-tab-item
 
