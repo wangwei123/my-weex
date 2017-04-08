@@ -1,0 +1,3 @@
+/node_modules
+/dist
+/platforms/ios/bundlejs/*
