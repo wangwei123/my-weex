@@ -175,10 +175,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/home/index.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/home/index.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-5dca073a"
+	__vue_options__._scopeId = "data-v-000cad2a"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -343,10 +343,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/launch/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/launch/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-9644c5f4"
+	__vue_options__._scopeId = "data-v-38616466"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -558,7 +558,7 @@
 	function getBaseUrl() {
 	  var bundleUrl = weex.config.bundleUrl;
 	  var isAndroidAssets = bundleUrl.indexOf('your_current_IP') >= 0 || bundleUrl.indexOf('file://assets/') >= 0;
-	  var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexFrame.app') > 0;
+	  var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('.app') > 0;
 	  var nativeBase = '';
 	  if (isAndroidAssets) {
 	    nativeBase = 'file://assets/dist/weex/';
@@ -1132,10 +1132,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/mine/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/mine/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-b2809834"
+	__vue_options__._scopeId = "data-v-1a24ea6d"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -1497,10 +1497,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/web/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/web/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-7f999416"
+	__vue_options__._scopeId = "data-v-7999928e"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -1738,10 +1738,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/userinfo/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/userinfo/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-0935200c"
+	__vue_options__._scopeId = "data-v-427dbb13"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -1993,10 +1993,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/personal/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/personal/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-6be0c75a"
+	__vue_options__._scopeId = "data-v-0358375a"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -2327,10 +2327,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/list/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/list/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-147fc531"
+	__vue_options__._scopeId = "data-v-f0360890"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -2497,10 +2497,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/scroller/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/scroller/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-0ae4504d"
+	__vue_options__._scopeId = "data-v-442ceb54"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -2648,10 +2648,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-root.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-root.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-53745179"
+	__vue_options__._scopeId = "data-v-433f1752"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -2782,10 +2782,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-navpage.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-navpage.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-49b64f2a"
+	__vue_options__._scopeId = "data-v-8dead01c"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -2966,10 +2966,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-navbar.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-navbar.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-5f2e3c32"
+	__vue_options__._scopeId = "data-v-0eccd500"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -3208,10 +3208,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-tabbar.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-tabbar.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-6c8a0735"
+	__vue_options__._scopeId = "data-v-d68a8a64"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -3390,10 +3390,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-tabitem.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-tabitem.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-53c4d93e"
+	__vue_options__._scopeId = "data-v-97f95a30"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -3604,10 +3604,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-list/index.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-list/index.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-1653cdf8"
+	__vue_options__._scopeId = "data-v-ed41e5de"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -3895,10 +3895,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-scroller/index.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-scroller/index.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-4f87c714"
+	__vue_options__._scopeId = "data-v-83885ca6"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -4177,10 +4177,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-button.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-button.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-afa76d36"
+	__vue_options__._scopeId = "data-v-9c8b82a8"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -4356,10 +4356,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-countdown.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-countdown.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-5b70a5ce"
+	__vue_options__._scopeId = "data-v-3a42d727"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -4532,10 +4532,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-hn.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-hn.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-dec4aa8e"
+	__vue_options__._scopeId = "data-v-80e14900"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -4644,10 +4644,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-list-item.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-list-item.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-1c13a402"
+	__vue_options__._scopeId = "data-v-5e6f4150"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -4747,10 +4747,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-marquee.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-marquee.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-7e37747f"
+	__vue_options__._scopeId = "data-v-b32fafd0"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -4908,10 +4908,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-navbar.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-navbar.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-f3a8c17a"
+	__vue_options__._scopeId = "data-v-e08cd6ec"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -5165,10 +5165,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-navpage.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-navpage.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-448c72e2"
+	__vue_options__._scopeId = "data-v-05ea7a28"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -5319,10 +5319,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-panel.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-panel.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-d8ee7abe"
+	__vue_options__._scopeId = "data-v-f958ef0c"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -5487,10 +5487,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-tabbar.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-tabbar.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-224cc491"
+	__vue_options__._scopeId = "data-v-2bdab9d8"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -5684,10 +5684,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-tabitem.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-tabitem.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-4e9afcf6"
+	__vue_options__._scopeId = "data-v-00e3351e"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -5852,10 +5852,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-tip.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-tip.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-0e48da10"
+	__vue_options__._scopeId = "data-v-afc009de"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -5975,10 +5975,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-tab.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-tab.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-2b20f61c"
+	__vue_options__._scopeId = "data-v-cc9825ea"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -6218,10 +6218,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/wx-tab-item.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-tab-item.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-1614853e"
+	__vue_options__._scopeId = "data-v-180b7676"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -6350,10 +6350,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/App.web.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/App.web.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-2147dad2"
+	__vue_options__._scopeId = "data-v-598615f0"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {

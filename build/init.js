@@ -13,19 +13,18 @@ const argv = yargs.argv
 
 console.log('argv._[0]', argv._[0])
 
-let ipIndexUrl = `http://${ip}:8080/dist/weex/App.js`
-let androidIndexUrl = argv._[0] === 'local' ? 'weex/App.js' : ipIndexUrl
+let indexURL = `http://${ip}:8080/dist/weex/App.js`
+let androidIndexURL = argv._[0] === 'local' ? 'weex/App.js' : indexURL
 
 // android 主机地址操作
 let androidConfigFile = path.join(__dirname, '../android.config.json')
-
 let androidConfig =
   `
 {
-  "AppName": "WeexApp",
-  "AppId": "com.syswin.weex",
+  "AppName": "WeexVue",
+  "AppId": "com.yueting.weex",
   "SplashText": "HelloWeex",
-  "WeexBundle": "${androidIndexUrl}"
+  "WeexBundle": "${androidIndexURL}"
 }
 
 `
@@ -37,29 +36,19 @@ fs.writeFile(androidConfigFile, androidConfig, function (err) {
 })
 
 // iOS 主机地址操作
-let iOSConfigFile = path.join(__dirname, '../platforms/ios/WeexFrame/IpDefine.h')
-let iosIndexDefine = argv._[0] === 'local' ? '[NSString stringWithFormat:@"file://%@/bundlejs/weex/App.js",[NSBundle mainBundle].bundlePath]' : `[NSString stringWithFormat:@"${ipIndexUrl}"]`
+let iOSConfigFile = path.join(__dirname, '../platforms/ios/WeexVue/AppDefine.h')
+let iOSIndexURL = argv._[0] === 'local' ? '[NSString stringWithFormat:@"file://%@/bundlejs/weex/App.js",[NSBundle mainBundle].bundlePath]' : `[NSString stringWithFormat:@"${indexURL}"]`
 
-let iOSIpconfig =
+let iOSConfig =
   `
-//
-//  IpDefine.m
-//  WeexFrame
-//
-//  Created by walid on 2017/3/20.
-//  Copyright © 2017年 weex. All rights reserved.
-//  Ip 地址配置
-//
+#ifndef AppDefine_h
+#define AppDefine_h
 
-#ifndef IpDefine_h
-#define IpDefine_h
-
-#define INDEX_URL ${iosIndexDefine}
-
-#endif /* IpDefine_h */
+#define INDEX_URL ${iOSIndexURL}
+#endif
 `
 
-fs.writeFile(iOSConfigFile, iOSIpconfig, function (err) {
+fs.writeFile(iOSConfigFile, iOSConfig, function (err) {
   if (err) {
     throw err
   }

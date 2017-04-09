@@ -13,7 +13,7 @@ let navigator = weex.requireModule('navigator')
 function getBaseUrl() {
   let bundleUrl = weex.config.bundleUrl
   let isAndroidAssets = bundleUrl.indexOf('your_current_IP') >= 0 || bundleUrl.indexOf('file://assets/') >= 0
-  let isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexFrame.app') > 0
+  let isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('.app') > 0
   let nativeBase = ''
   if (isAndroidAssets) {
     nativeBase = 'file://assets/dist/weex/'

@@ -131,10 +131,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/App.web.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/App.web.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-2147dad2"
+	__vue_options__._scopeId = "data-v-598615f0"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -7317,7 +7317,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
-	  * vue-router v2.3.1
+	  * vue-router v2.4.0
 	  * (c) 2017 Evan You
 	  * @license MIT
 	  */
@@ -7332,7 +7332,7 @@
 	}
 
 	function warn (condition, message) {
-	  if (!condition) {
+	  if (process.env.NODE_ENV !== 'production' && !condition) {
 	    typeof console !== 'undefined' && console.warn(("[vue-router] " + message));
 	  }
 	}
@@ -7387,17 +7387,12 @@
 
 	    var component = cache[name] = matched.components[name];
 
-	    // inject instance registration hooks
-	    var hooks = data.hook || (data.hook = {});
-	    hooks.init = function (vnode) {
-	      matched.instances[name] = vnode.child;
-	    };
-	    hooks.prepatch = function (oldVnode, vnode) {
-	      matched.instances[name] = vnode.child;
-	    };
-	    hooks.destroy = function (vnode) {
-	      if (matched.instances[name] === vnode.child) {
-	        matched.instances[name] = undefined;
+	    // attach instance registration hook
+	    // this will be called in the instance's injected lifecycle hooks
+	    data.registerRouteInstance = function (vm, val) {
+	      // val could be undefined for unregistration
+	      if (matched.instances[name] !== vm) {
+	        matched.instances[name] = val;
 	      }
 	    };
 
@@ -7419,7 +7414,13 @@
 	    case 'boolean':
 	      return config ? route.params : undefined
 	    default:
-	      warn(false, ("props in \"" + (route.path) + "\" is a " + (typeof config) + ", expecting an object, function or boolean."));
+	      if (process.env.NODE_ENV !== 'production') {
+	        warn(
+	          false,
+	          "props in \"" + (route.path) + "\" is a " + (typeof config) + ", " +
+	          "expecting an object, function or boolean."
+	        );
+	      }
 	  }
 	}
 
@@ -7429,7 +7430,7 @@
 	var encodeReserveReplacer = function (c) { return '%' + c.charCodeAt(0).toString(16); };
 	var commaRE = /%2C/g;
 
-	// fixed encodeURIComponent which is more comformant to RFC3986:
+	// fixed encodeURIComponent which is more conformant to RFC3986:
 	// - escapes [!'()*]
 	// - preserve commas
 	var encode = function (str) { return encodeURIComponent(str)
@@ -7440,25 +7441,24 @@
 
 	function resolveQuery (
 	  query,
-	  extraQuery
+	  extraQuery,
+	  _parseQuery
 	) {
 	  if ( extraQuery === void 0 ) extraQuery = {};
 
-	  if (query) {
-	    var parsedQuery;
-	    try {
-	      parsedQuery = parseQuery(query);
-	    } catch (e) {
-	      process.env.NODE_ENV !== 'production' && warn(false, e.message);
-	      parsedQuery = {};
-	    }
-	    for (var key in extraQuery) {
-	      parsedQuery[key] = extraQuery[key];
-	    }
-	    return parsedQuery
-	  } else {
-	    return extraQuery
+	  var parse = _parseQuery || parseQuery;
+	  var parsedQuery;
+	  try {
+	    parsedQuery = parse(query || '');
+	  } catch (e) {
+	    process.env.NODE_ENV !== 'production' && warn(false, e.message);
+	    parsedQuery = {};
 	  }
+	  for (var key in extraQuery) {
+	    var val = extraQuery[key];
+	    parsedQuery[key] = Array.isArray(val) ? val.slice() : val;
+	  }
+	  return parsedQuery
 	}
 
 	function parseQuery (query) {
@@ -7523,13 +7523,16 @@
 
 	/*  */
 
+
 	var trailingSlashRE = /\/?$/;
 
 	function createRoute (
 	  record,
 	  location,
-	  redirectedFrom
+	  redirectedFrom,
+	  router
 	) {
+	  var stringifyQuery$$1 = router && router.options.stringifyQuery;
 	  var route = {
 	    name: location.name || (record && record.name),
 	    meta: (record && record.meta) || {},
@@ -7537,11 +7540,11 @@
 	    hash: location.hash || '',
 	    query: location.query || {},
 	    params: location.params || {},
-	    fullPath: getFullPath(location),
+	    fullPath: getFullPath(location, stringifyQuery$$1),
 	    matched: record ? formatMatch(record) : []
 	  };
 	  if (redirectedFrom) {
-	    route.redirectedFrom = getFullPath(redirectedFrom);
+	    route.redirectedFrom = getFullPath(redirectedFrom, stringifyQuery$$1);
 	  }
 	  return Object.freeze(route)
 	}
@@ -7560,12 +7563,16 @@
 	  return res
 	}
 
-	function getFullPath (ref) {
+	function getFullPath (
+	  ref,
+	  _stringifyQuery
+	) {
 	  var path = ref.path;
 	  var query = ref.query; if ( query === void 0 ) query = {};
 	  var hash = ref.hash; if ( hash === void 0 ) hash = '';
 
-	  return (path || '/') + stringifyQuery(query) + hash
+	  var stringify = _stringifyQuery || stringifyQuery;
+	  return (path || '/') + stringify(query) + hash
 	}
 
 	function isSameRoute (a, b) {
@@ -7642,7 +7649,10 @@
 	    exact: Boolean,
 	    append: Boolean,
 	    replace: Boolean,
-	    activeClass: String,
+	    activeClass: {
+	      type: String,
+	      default: 'router-link-active'
+	    },
 	    event: {
 	      type: eventTypes,
 	      default: 'click'
@@ -7657,9 +7667,16 @@
 	    var location = ref.location;
 	    var route = ref.route;
 	    var href = ref.href;
+
 	    var classes = {};
-	    var activeClass = this.activeClass || router.options.linkActiveClass || 'router-link-active';
-	    var compareTarget = location.path ? createRoute(null, location) : route;
+	    var globalActiveClass = router.options.linkActiveClass;
+	    var activeClass = globalActiveClass == null
+	      ? this.activeClass
+	      : globalActiveClass;
+	    var compareTarget = location.path
+	      ? createRoute(null, location, null, router)
+	      : route;
+
 	    classes[activeClass] = this.exact
 	      ? isSameRoute(current, compareTarget)
 	      : isIncludedRoute(current, compareTarget);
@@ -7717,8 +7734,8 @@
 	  // don't redirect on right click
 	  if (e.button !== undefined && e.button !== 0) { return }
 	  // don't redirect if `target="_blank"`
-	  if (e.target && e.target.getAttribute) {
-	    var target = e.target.getAttribute('target');
+	  if (e.currentTarget && e.currentTarget.getAttribute) {
+	    var target = e.currentTarget.getAttribute('target');
 	    if (/\b_blank\b/i.test(target)) { return }
 	  }
 	  // this may be a Weex event which doesn't have this method
@@ -7759,13 +7776,26 @@
 	    get: function get () { return this.$root._route }
 	  });
 
+	  var isDef = function (v) { return v !== undefined; };
+
+	  var registerInstance = function (vm, callVal) {
+	    var i = vm.$options._parentVnode;
+	    if (isDef(i) && isDef(i = i.data) && isDef(i = i.registerRouteInstance)) {
+	      i(vm, callVal);
+	    }
+	  };
+
 	  Vue.mixin({
 	    beforeCreate: function beforeCreate () {
-	      if (this.$options.router) {
+	      if (isDef(this.$options.router)) {
 	        this._router = this.$options.router;
 	        this._router.init(this);
 	        Vue.util.defineReactive(this, '_route', this._router.history.current);
 	      }
+	      registerInstance(this, this);
+	    },
+	    destroyed: function destroyed () {
+	      registerInstance(this);
 	    }
 	  });
 
@@ -7788,11 +7818,12 @@
 	  base,
 	  append
 	) {
-	  if (relative.charAt(0) === '/') {
+	  var firstChar = relative.charAt(0);
+	  if (firstChar === '/') {
 	    return relative
 	  }
 
-	  if (relative.charAt(0) === '?' || relative.charAt(0) === '#') {
+	  if (firstChar === '?' || firstChar === '#') {
 	    return base + relative
 	  }
 
@@ -7809,11 +7840,9 @@
 	  var segments = relative.replace(/^\//, '').split('/');
 	  for (var i = 0; i < segments.length; i++) {
 	    var segment = segments[i];
-	    if (segment === '.') {
-	      continue
-	    } else if (segment === '..') {
+	    if (segment === '..') {
 	      stack.pop();
-	    } else {
+	    } else if (segment !== '.') {
 	      stack.push(segment);
 	    }
 	  }
@@ -8452,10 +8481,12 @@
 
 	/*  */
 
+
 	function normalizeLocation (
 	  raw,
 	  current,
-	  append
+	  append,
+	  router
 	) {
 	  var next = typeof raw === 'string' ? { path: raw } : raw;
 	  // named target
@@ -8485,7 +8516,13 @@
 	  var path = parsedPath.path
 	    ? resolvePath(parsedPath.path, basePath, append || next.append)
 	    : (current && current.path) || '/';
-	  var query = resolveQuery(parsedPath.query, next.query);
+
+	  var query = resolveQuery(
+	    parsedPath.query,
+	    next.query,
+	    router && router.options.parseQuery
+	  );
+
 	  var hash = next.hash || parsedPath.hash;
 	  if (hash && hash.charAt(0) !== '#') {
 	    hash = "#" + hash;
@@ -8508,7 +8545,11 @@
 
 	/*  */
 
-	function createMatcher (routes) {
+
+	function createMatcher (
+	  routes,
+	  router
+	) {
 	  var ref = createRouteMap(routes);
 	  var pathMap = ref.pathMap;
 	  var nameMap = ref.nameMap;
@@ -8522,7 +8563,7 @@
 	    currentRoute,
 	    redirectedFrom
 	  ) {
-	    var location = normalizeLocation(raw, currentRoute);
+	    var location = normalizeLocation(raw, currentRoute, false, router);
 	    var name = location.name;
 
 	    if (name) {
@@ -8568,7 +8609,7 @@
 	  ) {
 	    var originalRedirect = record.redirect;
 	    var redirect = typeof originalRedirect === 'function'
-	        ? originalRedirect(createRoute(record, location))
+	        ? originalRedirect(createRoute(record, location, null, router))
 	        : originalRedirect;
 
 	    if (typeof redirect === 'string') {
@@ -8576,9 +8617,11 @@
 	    }
 
 	    if (!redirect || typeof redirect !== 'object') {
-	      process.env.NODE_ENV !== 'production' && warn(
-	        false, ("invalid redirect option: " + (JSON.stringify(redirect)))
-	      );
+	      if (process.env.NODE_ENV !== 'production') {
+	        warn(
+	          false, ("invalid redirect option: " + (JSON.stringify(redirect)))
+	        );
+	      }
 	      return _createRoute(null, location)
 	    }
 
@@ -8618,7 +8661,9 @@
 	        hash: hash
 	      }, undefined, location)
 	    } else {
-	      warn(false, ("invalid redirect option: " + (JSON.stringify(redirect))));
+	      if (process.env.NODE_ENV !== 'production') {
+	        warn(false, ("invalid redirect option: " + (JSON.stringify(redirect))));
+	      }
 	      return _createRoute(null, location)
 	    }
 	  }
@@ -8653,7 +8698,7 @@
 	    if (record && record.matchAs) {
 	      return alias(record, location, record.matchAs)
 	    }
-	    return createRoute(record, location, redirectedFrom)
+	    return createRoute(record, location, redirectedFrom, router)
 	  }
 
 	  return {
@@ -8869,7 +8914,6 @@
 
 	/*  */
 
-
 	var History = function History (router, base) {
 	  this.router = router;
 	  this.base = normalizeBase(base);
@@ -8878,18 +8922,27 @@
 	  this.pending = null;
 	  this.ready = false;
 	  this.readyCbs = [];
+	  this.readyErrorCbs = [];
+	  this.errorCbs = [];
 	};
 
 	History.prototype.listen = function listen (cb) {
 	  this.cb = cb;
 	};
 
-	History.prototype.onReady = function onReady (cb) {
+	History.prototype.onReady = function onReady (cb, errorCb) {
 	  if (this.ready) {
 	    cb();
 	  } else {
 	    this.readyCbs.push(cb);
+	    if (errorCb) {
+	      this.readyErrorCbs.push(errorCb);
+	    }
 	  }
+	};
+
+	History.prototype.onError = function onError (errorCb) {
+	  this.errorCbs.push(errorCb);
 	};
 
 	History.prototype.transitionTo = function transitionTo (location, onComplete, onAbort) {
@@ -8904,18 +8957,29 @@
 	    // fire ready cbs once
 	    if (!this$1.ready) {
 	      this$1.ready = true;
-	      this$1.readyCbs.forEach(function (cb) {
-	        cb(route);
-	      });
+	      this$1.readyCbs.forEach(function (cb) { cb(route); });
 	    }
-	  }, onAbort);
+	  }, function (err) {
+	    if (onAbort) {
+	      onAbort(err);
+	    }
+	    if (err && !this$1.ready) {
+	      this$1.ready = true;
+	      this$1.readyErrorCbs.forEach(function (cb) { cb(err); });
+	    }
+	  });
 	};
 
 	History.prototype.confirmTransition = function confirmTransition (route, onComplete, onAbort) {
 	    var this$1 = this;
 
 	  var current = this.current;
-	  var abort = function () { onAbort && onAbort(); };
+	  var abort = function (err) {
+	    if (err instanceof Error) {
+	      this$1.errorCbs.forEach(function (cb) { cb(err); });
+	    }
+	    onAbort && onAbort(err);
+	  };
 	  if (
 	    isSameRoute(route, current) &&
 	    // in the case the route map has been dynamically appended to
@@ -8948,20 +9012,28 @@
 	    if (this$1.pending !== route) {
 	      return abort()
 	    }
-	    hook(route, current, function (to) {
-	      if (to === false) {
-	        // next(false) -> abort navigation, ensure current URL
-	        this$1.ensureURL(true);
-	        abort();
-	      } else if (typeof to === 'string' || typeof to === 'object') {
-	        // next('/') or next({ path: '/' }) -> redirect
-	        (typeof to === 'object' && to.replace) ? this$1.replace(to) : this$1.push(to);
-	        abort();
-	      } else {
-	        // confirm transition and pass on the value
-	        next(to);
-	      }
-	    });
+	    try {
+	      hook(route, current, function (to) {
+	        if (to === false || to instanceof Error) {
+	          // next(false) -> abort navigation, ensure current URL
+	          this$1.ensureURL(true);
+	          abort(to);
+	        } else if (typeof to === 'string' || typeof to === 'object') {
+	          // next('/') or next({ path: '/' }) -> redirect
+	          abort();
+	          if (typeof to === 'object' && to.replace) {
+	            this$1.replace(to);
+	          } else {
+	            this$1.push(to);
+	          }
+	        } else {
+	          // confirm transition and pass on the value
+	          next(to);
+	        }
+	      });
+	    } catch (e) {
+	      abort(e);
+	    }
 	  };
 
 	  runQueue(queue, iterator, function () {
@@ -8978,7 +9050,7 @@
 	      onComplete(route);
 	      if (this$1.router.app) {
 	        this$1.router.app.$nextTick(function () {
-	          postEnterCbs.forEach(function (cb) { return cb(); });
+	          postEnterCbs.forEach(function (cb) { cb(); });
 	        });
 	      }
 	    });
@@ -9122,31 +9194,71 @@
 	}
 
 	function resolveAsyncComponents (matched) {
-	  return flatMapComponents(matched, function (def, _, match, key) {
-	    // if it's a function and doesn't have Vue options attached,
+	  var _next;
+	  var pending = 0;
+	  var error = null;
+
+	  flatMapComponents(matched, function (def, _, match, key) {
+	    // if it's a function and doesn't have cid attached,
 	    // assume it's an async component resolve function.
 	    // we are not using Vue's default async resolving mechanism because
 	    // we want to halt the navigation until the incoming component has been
 	    // resolved.
-	    if (typeof def === 'function' && !def.options) {
-	      return function (to, from, next) {
-	        var resolve = once(function (resolvedDef) {
-	          match.components[key] = resolvedDef;
-	          next();
-	        });
+	    if (typeof def === 'function' && def.cid === undefined) {
+	      pending++;
 
-	        var reject = once(function (reason) {
-	          warn(false, ("Failed to resolve async component " + key + ": " + reason));
-	          next(false);
-	        });
+	      var resolve = once(function (resolvedDef) {
+	        // save resolved on async factory in case it's used elsewhere
+	        def.resolved = typeof resolvedDef === 'function'
+	          ? resolvedDef
+	          : _Vue.extend(resolvedDef);
+	        match.components[key] = resolvedDef;
+	        pending--;
+	        if (pending <= 0 && _next) {
+	          _next();
+	        }
+	      });
 
-	        var res = def(resolve, reject);
-	        if (res && typeof res.then === 'function') {
+	      var reject = once(function (reason) {
+	        var msg = "Failed to resolve async component " + key + ": " + reason;
+	        process.env.NODE_ENV !== 'production' && warn(false, msg);
+	        if (!error) {
+	          error = reason instanceof Error
+	            ? reason
+	            : new Error(msg);
+	          if (_next) { _next(error); }
+	        }
+	      });
+
+	      var res;
+	      try {
+	        res = def(resolve, reject);
+	      } catch (e) {
+	        reject(e);
+	      }
+	      if (res) {
+	        if (typeof res.then === 'function') {
 	          res.then(resolve, reject);
+	        } else {
+	          // new syntax in Vue 2.3
+	          var comp = res.component;
+	          if (comp && typeof comp.then === 'function') {
+	            comp.then(resolve, reject);
+	          }
 	        }
 	      }
 	    }
-	  })
+	  });
+
+	  return function (to, from, next) {
+	    if (error) {
+	      next(error);
+	    } else if (pending <= 0) {
+	      next();
+	    } else {
+	      _next = next;
+	    }
+	  }
 	}
 
 	function flatMapComponents (
@@ -9428,7 +9540,7 @@
 	  this.options = options;
 	  this.beforeHooks = [];
 	  this.afterHooks = [];
-	  this.matcher = createMatcher(options.routes || []);
+	  this.matcher = createMatcher(options.routes || [], this);
 
 	  var mode = options.mode || 'hash';
 	  this.fallback = mode === 'history' && !supportsPushState;
@@ -9519,8 +9631,12 @@
 	  this.afterHooks.push(fn);
 	};
 
-	VueRouter.prototype.onReady = function onReady (cb) {
-	  this.history.onReady(cb);
+	VueRouter.prototype.onReady = function onReady (cb, errorCb) {
+	  this.history.onReady(cb, errorCb);
+	};
+
+	VueRouter.prototype.onError = function onError (errorCb) {
+	  this.history.onError(errorCb);
 	};
 
 	VueRouter.prototype.push = function push (location, onComplete, onAbort) {
@@ -9562,7 +9678,12 @@
 	  current,
 	  append
 	) {
-	  var location = normalizeLocation(to, current || this.history.current, append);
+	  var location = normalizeLocation(
+	    to,
+	    current || this.history.current,
+	    append,
+	    this
+	  );
 	  var route = this.match(location, current);
 	  var fullPath = route.redirectedFrom || route.fullPath;
 	  var base = this.history.base;
@@ -9592,7 +9713,7 @@
 	}
 
 	VueRouter.install = install;
-	VueRouter.version = '2.3.1';
+	VueRouter.version = '2.4.0';
 
 	if (inBrowser && window.Vue) {
 	  window.Vue.use(VueRouter);
@@ -9758,10 +9879,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/home/index.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/home/index.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-5dca073a"
+	__vue_options__._scopeId = "data-v-000cad2a"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -9926,10 +10047,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/launch/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/launch/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-9644c5f4"
+	__vue_options__._scopeId = "data-v-38616466"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -10141,7 +10262,7 @@
 	function getBaseUrl() {
 	  var bundleUrl = weex.config.bundleUrl;
 	  var isAndroidAssets = bundleUrl.indexOf('your_current_IP') >= 0 || bundleUrl.indexOf('file://assets/') >= 0;
-	  var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexFrame.app') > 0;
+	  var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('.app') > 0;
 	  var nativeBase = '';
 	  if (isAndroidAssets) {
 	    nativeBase = 'file://assets/dist/weex/';
@@ -10715,10 +10836,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/mine/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/mine/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-b2809834"
+	__vue_options__._scopeId = "data-v-1a24ea6d"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -11080,10 +11201,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/web/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/web/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-7f999416"
+	__vue_options__._scopeId = "data-v-7999928e"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -11321,10 +11442,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/userinfo/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/userinfo/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-0935200c"
+	__vue_options__._scopeId = "data-v-427dbb13"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -11576,10 +11697,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/personal/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/personal/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-6be0c75a"
+	__vue_options__._scopeId = "data-v-0358375a"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -11910,10 +12031,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/list/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/list/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-147fc531"
+	__vue_options__._scopeId = "data-v-f0360890"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -12080,10 +12201,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/scroller/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/scroller/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-0ae4504d"
+	__vue_options__._scopeId = "data-v-442ceb54"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -12227,10 +12348,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/views/404/app.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/views/404/app.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-de4fe04e"
+	__vue_options__._scopeId = "data-v-4a3e6c72"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -12293,10 +12414,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/node_modules/vue-progressbar/vue-progressbar.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/node_modules/vue-progressbar/vue-progressbar.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-27b834df"
+	__vue_options__._scopeId = "data-v-6bb47eb4"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -12443,10 +12564,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-root.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-root.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-53745179"
+	__vue_options__._scopeId = "data-v-433f1752"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -12577,10 +12698,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-navpage.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-navpage.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-49b64f2a"
+	__vue_options__._scopeId = "data-v-8dead01c"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -12761,10 +12882,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-navbar.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-navbar.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-5f2e3c32"
+	__vue_options__._scopeId = "data-v-0eccd500"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -13003,10 +13124,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-tabbar.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-tabbar.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-6c8a0735"
+	__vue_options__._scopeId = "data-v-d68a8a64"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -13185,10 +13306,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-tabitem.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-tabitem.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-53c4d93e"
+	__vue_options__._scopeId = "data-v-97f95a30"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -13399,10 +13520,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-list/index.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-list/index.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-1653cdf8"
+	__vue_options__._scopeId = "data-v-ed41e5de"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -13690,10 +13811,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-frame/src/components/osc-scroller/index.vue"
+	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/osc-scroller/index.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-4f87c714"
+	__vue_options__._scopeId = "data-v-83885ca6"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {

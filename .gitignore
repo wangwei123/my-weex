@@ -1,3 +1,4 @@
 /node_modules
 /dist
+/platforms/ios/build
 /platforms/ios/bundlejs/*
