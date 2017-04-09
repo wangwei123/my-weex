@@ -1,10 +1,10 @@
 <template>
   <div>
-   <div class="row">
+   <div :style="barStyle">
      <slot></slot>
    </div>
-   <div class="row">
-     <div ref="barLine" :style="barStyle">
+   <div v-if="displayline" class="row">
+     <div ref="barline" :style="lineStyle">
      </div>
    </div>
  </div>
@@ -28,20 +28,28 @@
       defaultColor: {default: '#000'},
       activeColor: {default: '#FF7F24'},
       activeClass: {default: ''},
-      barActiveColor: {default: '#FF7F24'},
+      lineActiveColor: {default: '#FF7F24'},
       lineWidth: {default: 3},
-      currentIndex: {default: 0}
+      height: {default: 60},
+      currentIndex: {default: 0},
+      displayline: {default: true}
     },
     created () {
       this.move()
     },
     computed: {
       barStyle () {
+        return {
+          flexDirection: 'row',
+          height: this.height + 'px'
+        }
+      },
+      lineStyle () {
         let width = 750 / this.number
         return {
           width: width + 'px',
           height: this.lineWidth + 'px',
-          backgroundColor: this.barActiveColor
+          backgroundColor: this.lineActiveColor
         }
       },
       left () {
@@ -52,8 +60,8 @@
     },
     methods: {
       move: function() {
-        let barLineEl = this.$refs.barLine
-        animation.transition(barLineEl, {
+        let barlineEl = this.$refs.barline
+        animation.transition(barlineEl, {
           styles: {
             transform: 'translate('+ this.left +'px, 0px)',
             transformOrigin: 'center center'

@@ -9929,6 +9929,11 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
 
 	var animation = weex.requireModule('animation');
 	var modal = weex.requireModule('modal');
@@ -9991,6 +9996,13 @@
 	      "rightItemSrc": "http://gtms02.alicdn.com/tps/i2/TB1ED7iMpXXXXXEXXXXWA_BHXXX-48-48.png"
 	    }
 	  }, [_c('wx-tab', {
+	    attrs: {
+	      "fontSize": "28",
+	      "height": "60",
+	      "activeColor": "#EE00EE",
+	      "lineActiveColor": "#EE00EE",
+	      "displayline": true
+	    },
 	    model: {
 	      value: (_vm.index),
 	      callback: function(value) {

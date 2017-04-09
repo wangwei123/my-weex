@@ -1,6 +1,11 @@
 <template>
   <wx-navpage class="wx-navpage" data-role="none" :height="navBarHeight" background-color="#ff5898" :title="title" title-color="white" left-item-title="More" left-item-color="white" right-item-src="http://gtms02.alicdn.com/tps/i2/TB1ED7iMpXXXXXEXXXXWA_BHXXX-48-48.png">
-   <wx-tab v-model="index">
+   <wx-tab v-model="index"
+    fontSize="28"
+    height="60"
+    activeColor="#EE00EE"
+    lineActiveColor="#EE00EE"
+    :displayline="true">
       <wx-tab-item @onItemClick="myhandler" selected>已发货</wx-tab-item>
       <wx-tab-item @onItemClick="myhandler">未发货</wx-tab-item>
       <wx-tab-item @onItemClick="myhandler">测试</wx-tab-item>

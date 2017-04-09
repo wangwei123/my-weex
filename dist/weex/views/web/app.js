@@ -225,6 +225,11 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
 
 	var animation = weex.requireModule('animation');
 	var modal = weex.requireModule('modal');
@@ -287,6 +292,13 @@
 	      "rightItemSrc": "http://gtms02.alicdn.com/tps/i2/TB1ED7iMpXXXXXEXXXXWA_BHXXX-48-48.png"
 	    }
 	  }, [_c('wx-tab', {
+	    attrs: {
+	      "fontSize": "28",
+	      "height": "60",
+	      "activeColor": "#EE00EE",
+	      "lineActiveColor": "#EE00EE",
+	      "displayline": true
+	    },
 	    model: {
 	      value: (_vm.index),
 	      callback: function(value) {
@@ -6039,9 +6051,11 @@
 	    defaultColor: { default: '#000' },
 	    activeColor: { default: '#FF7F24' },
 	    activeClass: { default: '' },
-	    barActiveColor: { default: '#FF7F24' },
+	    lineActiveColor: { default: '#FF7F24' },
 	    lineWidth: { default: 3 },
-	    currentIndex: { default: 0 }
+	    height: { default: 60 },
+	    currentIndex: { default: 0 },
+	    displayline: { default: true }
 	  },
 	  created: function created() {
 	    this.move();
@@ -6049,11 +6063,17 @@
 
 	  computed: {
 	    barStyle: function barStyle() {
+	      return {
+	        flexDirection: 'row',
+	        height: this.height + 'px'
+	      };
+	    },
+	    lineStyle: function lineStyle() {
 	      var width = 750 / this.number;
 	      return {
 	        width: width + 'px',
 	        height: this.lineWidth + 'px',
-	        backgroundColor: this.barActiveColor
+	        backgroundColor: this.lineActiveColor
 	      };
 	    },
 	    left: function left() {
@@ -6064,8 +6084,8 @@
 	  },
 	  methods: {
 	    move: function move() {
-	      var barLineEl = this.$refs.barLine;
-	      animation.transition(barLineEl, {
+	      var barlineEl = this.$refs.barline;
+	      animation.transition(barlineEl, {
 	        styles: {
 	          transform: 'translate(' + this.left + 'px, 0px)',
 	          transformOrigin: 'center center'
@@ -6181,13 +6201,13 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', [_c('div', {
-	    staticClass: ["row"]
-	  }, [_vm._t("default")], 2), _c('div', {
+	    style: _vm.barStyle
+	  }, [_vm._t("default")], 2), (_vm.displayline) ? _c('div', {
 	    staticClass: ["row"]
 	  }, [_c('div', {
-	    ref: "barLine",
-	    style: _vm.barStyle
-	  })])])
+	    ref: "barline",
+	    style: _vm.lineStyle
+	  })]) : _vm._e()])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
