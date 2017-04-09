@@ -29,7 +29,7 @@
             icon: '',
             image: 'http://gtms03.alicdn.com/tps/i3/TB1LEn9MpXXXXaUXpXX9t7RGVXX-46-46.png',
             selectedImage: 'http://gtms02.alicdn.com/tps/i2/TB1qysbMpXXXXcnXXXX9t7RGVXX-46-46.png',
-            src: `${navigator.getBaseUrl()}${route.mine.jsPath}.js`,
+            src: `${navigator.getBaseUrl()}${route.home.jsPath}.js`,
             visibility: 'hidden'
           },
           {
@@ -49,7 +49,7 @@
             icon: '',
             image: 'http://gtms03.alicdn.com/tps/i3/TB1LEn9MpXXXXaUXpXX9t7RGVXX-46-46.png',
             selectedImage: 'http://gtms02.alicdn.com/tps/i2/TB1qysbMpXXXXcnXXXX9t7RGVXX-46-46.png',
-            src: `${navigator.getBaseUrl()}${route.mine.jsPath}.js`,
+            src: `${navigator.getBaseUrl()}${route.home.jsPath}.js`,
             visibility: 'hidden'
           }
         ]

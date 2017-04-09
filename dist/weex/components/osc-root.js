@@ -197,8 +197,31 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-	  "wx-navpage": {
-	    "marginTop": 60
+	  "cell": {
+	    "borderBottomWidth": 1,
+	    "borderBottomStyle": "solid",
+	    "borderBottomColor": "#E5E5E5"
+	  },
+	  "list": {
+	    "width": 750
+	  },
+	  "panel": {
+	    "width": 600,
+	    "height": 250,
+	    "marginLeft": 75,
+	    "marginTop": 35,
+	    "marginBottom": 35,
+	    "flexDirection": "column",
+	    "justifyContent": "center",
+	    "borderWidth": 2,
+	    "borderStyle": "solid",
+	    "borderColor": "rgb(162,217,192)",
+	    "backgroundColor": "rgba(162,217,192,0.2)"
+	  },
+	  "text": {
+	    "fontSize": 50,
+	    "textAlign": "center",
+	    "color": "#41B883"
 	  }
 	}
 
@@ -230,18 +253,96 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 	var animation = weex.requireModule('animation');
 	var modal = weex.requireModule('modal');
+	var dom = weex.requireModule('dom');
+	var LOADMORE_COUNT = 4;
 	module.exports = {
 	  data: {
+	    scrollerHeight: 1050,
 	    navBarHeight: 88,
-	    title: 'Navigator1',
-	    dir: 'examples',
-	    baseURL: '',
-	    selectedIndex: 0,
-	    isActive: true,
-	    index: 0
+	    title: '游戏盒子',
+	    lists: [1, 2, 3, 4, 5]
 	  },
 	  created: function created() {
 	    this.$getConfig(function (config) {
@@ -250,6 +351,7 @@
 	        var scale = env.scale;
 	        var deviceWidth = env.deviceWidth / scale;
 	        this.navBarHeight = 64.0 * 750.0 / deviceWidth;
+	        this.scrollerHeight = env.deviceHeight - this.navBarHeight - 77;
 	      }
 	    }.bind(this));
 	    this.$on('naviBar.rightItem.click', function (e) {
@@ -268,8 +370,21 @@
 	    });
 	  },
 	  methods: {
-	    myhandler: function myhandler() {
+	    myhandler: function myhandler(index) {
+	      var el = this.$refs['tab' + index];
+	      dom.scrollToElement(el, {});
 	      // modal.alert({'message': 'test'})
+	    },
+	    fetch: function fetch(event) {
+	      var _this = this;
+
+	      modal.toast({ message: 'loadmore', duration: 1 });
+	      setTimeout(function () {
+	        var length = _this.lists.length;
+	        for (var i = length; i < length + LOADMORE_COUNT; ++i) {
+	          _this.lists.push(i + 1);
+	        }
+	      }, 800);
 	    }
 	  }
 	};
@@ -284,19 +399,17 @@
 	    attrs: {
 	      "dataRole": "none",
 	      "height": _vm.navBarHeight,
-	      "backgroundColor": "#ff5898",
+	      "backgroundColor": "#FF4500",
 	      "title": _vm.title,
 	      "titleColor": "white",
-	      "leftItemTitle": "More",
-	      "leftItemColor": "white",
 	      "rightItemSrc": "http://gtms02.alicdn.com/tps/i2/TB1ED7iMpXXXXXEXXXXWA_BHXXX-48-48.png"
 	    }
 	  }, [_c('wx-tab', {
 	    attrs: {
 	      "fontSize": "28",
-	      "height": "60",
-	      "activeColor": "#EE00EE",
-	      "lineActiveColor": "#EE00EE",
+	      "height": "70",
+	      "activeColor": "#FF4500",
+	      "lineActiveColor": "#FF4500",
 	      "displayline": true
 	    },
 	    model: {
@@ -310,21 +423,230 @@
 	      "selected": ""
 	    },
 	    on: {
-	      "onItemClick": _vm.myhandler
+	      "onItemClick": function($event) {
+	        _vm.myhandler(0)
+	      }
 	    }
-	  }, [_vm._v("已发货")]), _c('wx-tab-item', {
+	  }, [_vm._v("新游推荐")]), _c('wx-tab-item', {
 	    on: {
-	      "onItemClick": _vm.myhandler
+	      "onItemClick": function($event) {
+	        _vm.myhandler(1)
+	      }
 	    }
-	  }, [_vm._v("未发货")]), _c('wx-tab-item', {
+	  }, [_vm._v("排行榜")]), _c('wx-tab-item', {
 	    on: {
-	      "onItemClick": _vm.myhandler
+	      "onItemClick": function($event) {
+	        _vm.myhandler(2)
+	      }
 	    }
-	  }, [_vm._v("测试")]), _c('wx-tab-item', {
+	  }, [_vm._v("手游")]), _c('wx-tab-item', {
 	    on: {
-	      "onItemClick": _vm.myhandler
+	      "onItemClick": function($event) {
+	        _vm.myhandler(3)
+	      }
 	    }
-	  }, [_vm._v("全部订单")])], 1)], 1)
+	  }, [_vm._v("H5游戏")])], 1), _c('scroller', {
+	    style: {
+	      width: 750,
+	      height: _vm.scrollerHeight
+	    },
+	    attrs: {
+	      "scrollDirection": "horizontal"
+	    }
+	  }, [_c('list', {
+	    ref: "tab0",
+	    staticClass: ["list"],
+	    attrs: {
+	      "tabIndex": "0",
+	      "loadmoreoffset": "10"
+	    },
+	    on: {
+	      "loadmore": _vm.fetch
+	    }
+	  }, [_c('cell', {
+	    staticClass: ["cell"],
+	    appendAsTree: true,
+	    attrs: {
+	      "append": "tree"
+	    }
+	  }, [_c('div', {
+	    staticStyle: {
+	      flexDirection: "row",
+	      marginTop: "10px",
+	      marginBottom: "10px"
+	    }
+	  }, [_c('image', {
+	    staticStyle: {
+	      width: "100px",
+	      height: "100px",
+	      marginLeft: "20px"
+	    },
+	    attrs: {
+	      "src": "http://f1.img4399.com/ma~a_26444~105x105?1490663772"
+	    }
+	  }), _c('div', {
+	    staticStyle: {
+	      flexDirection: "column",
+	      marginLeft: "30px",
+	      justifyContent: "center"
+	    }
+	  }, [_c('text', {
+	    staticStyle: {
+	      fontSize: "28px"
+	    }
+	  }, [_vm._v("梦幻西游OL")]), _c('text', {
+	    staticStyle: {
+	      fontSize: "24px"
+	    }
+	  }, [_vm._v("5665下载  196M")]), _c('text', {
+	    staticStyle: {
+	      fontSize: "24px"
+	    }
+	  }, [_vm._v("回合制游戏")])])])]), _c('cell', {
+	    staticClass: ["cell"],
+	    appendAsTree: true,
+	    attrs: {
+	      "append": "tree"
+	    }
+	  }, [_c('div', {
+	    staticStyle: {
+	      flexDirection: "row",
+	      marginTop: "10px",
+	      marginBottom: "10px"
+	    }
+	  }, [_c('image', {
+	    staticStyle: {
+	      width: "100px",
+	      height: "100px",
+	      marginLeft: "20px"
+	    },
+	    attrs: {
+	      "src": "http://f1.img4399.com/ma~a_big_105875~250x250?1491371648"
+	    }
+	  }), _c('div', {
+	    staticStyle: {
+	      flexDirection: "column",
+	      marginLeft: "30px",
+	      justifyContent: "center"
+	    }
+	  }, [_c('text', {
+	    staticStyle: {
+	      fontSize: "28px"
+	    }
+	  }, [_vm._v("九阳神功:起源")]), _c('text', {
+	    staticStyle: {
+	      fontSize: "24px"
+	    }
+	  }, [_vm._v("5665下载  196M")]), _c('text', {
+	    staticStyle: {
+	      fontSize: "24px"
+	    }
+	  }, [_vm._v("回合制游戏")])])])]), _c('cell', {
+	    staticClass: ["cell"],
+	    appendAsTree: true,
+	    attrs: {
+	      "append": "tree"
+	    }
+	  }, [_c('div', {
+	    staticStyle: {
+	      flexDirection: "row",
+	      marginTop: "10px",
+	      marginBottom: "10px"
+	    }
+	  }, [_c('image', {
+	    staticStyle: {
+	      width: "100px",
+	      height: "100px",
+	      marginLeft: "20px"
+	    },
+	    attrs: {
+	      "src": "http://f1.img4399.com/ma~a_big_93079~250x250?1490593729"
+	    }
+	  }), _c('div', {
+	    staticStyle: {
+	      flexDirection: "column",
+	      marginLeft: "30px",
+	      justifyContent: "center"
+	    }
+	  }, [_c('text', {
+	    staticStyle: {
+	      fontSize: "28px"
+	    }
+	  }, [_vm._v("部落冲突:皇室战争")]), _c('text', {
+	    staticStyle: {
+	      fontSize: "24px"
+	    }
+	  }, [_vm._v("5665下载  196M")]), _c('text', {
+	    staticStyle: {
+	      fontSize: "24px"
+	    }
+	  }, [_vm._v("回合制游戏")])])])])]), _c('list', {
+	    ref: "tab1",
+	    staticClass: ["list"],
+	    attrs: {
+	      "tabIndex": "1",
+	      "loadmoreoffset": "10"
+	    },
+	    on: {
+	      "loadmore": _vm.fetch
+	    }
+	  }, _vm._l((_vm.lists), function(num) {
+	    return _c('cell', {
+	      staticClass: ["cell"],
+	      appendAsTree: true,
+	      attrs: {
+	        "append": "tree"
+	      }
+	    }, [_c('div', {
+	      staticClass: ["panel"]
+	    }, [_c('text', {
+	      staticClass: ["text"]
+	    }, [_vm._v("text" + _vm._s(num))])])])
+	  })), _c('list', {
+	    ref: "tab2",
+	    staticClass: ["list"],
+	    attrs: {
+	      "tabIndex": "1",
+	      "loadmoreoffset": "10"
+	    },
+	    on: {
+	      "loadmore": _vm.fetch
+	    }
+	  }, _vm._l((_vm.lists), function(num) {
+	    return _c('cell', {
+	      staticClass: ["cell"],
+	      appendAsTree: true,
+	      attrs: {
+	        "append": "tree"
+	      }
+	    }, [_c('div', {
+	      staticClass: ["panel"]
+	    }, [_c('text', {
+	      staticClass: ["text"]
+	    }, [_vm._v("content" + _vm._s(num))])])])
+	  })), _c('list', {
+	    ref: "tab3",
+	    staticClass: ["list"],
+	    attrs: {
+	      "tabIndex": "1",
+	      "loadmoreoffset": "10"
+	    },
+	    on: {
+	      "loadmore": _vm.fetch
+	    }
+	  }, _vm._l((_vm.lists), function(num) {
+	    return _c('cell', {
+	      staticClass: ["cell"],
+	      appendAsTree: true,
+	      attrs: {
+	        "append": "tree"
+	      }
+	    }, [_c('div', {
+	      staticClass: ["panel"]
+	    }, [_c('text', {
+	      staticClass: ["text"]
+	    }, [_vm._v("content" + _vm._s(num))])])])
+	  }))])], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
@@ -5967,10 +6289,6 @@
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
-	/* styles */
-	__vue_styles__.push(__webpack_require__(119)
-	)
-
 	/* script */
 	__vue_exports__ = __webpack_require__(120)
 
@@ -5990,7 +6308,6 @@
 	__vue_options__.__file = "/Users/wangwei/WorkSpace/weex-vue/src/components/wx-tab.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-cc9825ea"
 	__vue_options__.style = __vue_options__.style || {}
 	__vue_styles__.forEach(function (module) {
 	  for (var name in module) {
@@ -6005,17 +6322,7 @@
 
 
 /***/ },
-/* 119 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	  "row": {
-	    "flexDirection": "row",
-	    "height": 60
-	  }
-	}
-
-/***/ },
+/* 119 */,
 /* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -6024,13 +6331,6 @@
 	var _multiItems = __webpack_require__(121);
 
 	var animation = weex.requireModule('animation'); //
-	//
-	//
-	//
-	//
-	//
-	//
-	//
 	//
 	//
 	//
@@ -6062,10 +6362,19 @@
 	  },
 
 	  computed: {
+	    containerStyle: function containerStyle() {
+	      return {
+	        height: this.height + 'px',
+	        marginTop: '40px',
+	        borderBottomWidth: '1px',
+	        borderBottomColor: '#E5E5E5',
+	        borderBottomStyle: 'solid'
+	      };
+	    },
 	    barStyle: function barStyle() {
 	      return {
 	        flexDirection: 'row',
-	        height: this.height + 'px'
+	        height: this.height - this.lineWidth - 4 + 'px'
 	      };
 	    },
 	    lineStyle: function lineStyle() {
@@ -6073,6 +6382,7 @@
 	      return {
 	        width: width + 'px',
 	        height: this.lineWidth + 'px',
+	        marginTop: '0px',
 	        backgroundColor: this.lineActiveColor
 	      };
 	    },
@@ -6200,11 +6510,11 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('div', {
-	    style: _vm.barStyle
-	  }, [_vm._t("default")], 2), (_vm.displayline) ? _c('div', {
-	    staticClass: ["row"]
+	  return _c('div', {
+	    style: _vm.containerStyle
 	  }, [_c('div', {
+	    style: _vm.barStyle
+	  }, [_vm._t("default")], 2), (_vm.displayline) ? _c('div', [_c('div', {
 	    ref: "barline",
 	    style: _vm.lineStyle
 	  })]) : _vm._e()])

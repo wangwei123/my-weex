@@ -1,21 +1,14 @@
 <template>
-  <div>
+  <div :style="containerStyle">
    <div :style="barStyle">
      <slot></slot>
    </div>
-   <div v-if="displayline" class="row">
+   <div v-if="displayline">
      <div ref="barline" :style="lineStyle">
      </div>
    </div>
  </div>
 </template>
-
-<style scoped>
- .row{
-   flex-direction: row;
-   height: 60px;
- }
-</style>
 
 <script>
   import { parentMixin } from '../mixins/multi-items'
@@ -38,10 +31,19 @@
       this.move()
     },
     computed: {
+      containerStyle () {
+        return {
+          height: this.height + 'px',
+          marginTop: '40px',
+          borderBottomWidth: '1px',
+          borderBottomColor: '#E5E5E5',
+          borderBottomStyle: 'solid'
+        }
+      },
       barStyle () {
         return {
           flexDirection: 'row',
-          height: this.height + 'px'
+          height: (this.height - this.lineWidth - 4) + 'px'
         }
       },
       lineStyle () {
@@ -49,6 +51,7 @@
         return {
           width: width + 'px',
           height: this.lineWidth + 'px',
+          marginTop: '0px',
           backgroundColor: this.lineActiveColor
         }
       },
