@@ -2,3 +2,5 @@
 /dist
 /platforms/ios/build
 /platforms/ios/bundlejs/*
+/platforms/android/app/build
+/platforms/android/app/src/main/assets/dist/
