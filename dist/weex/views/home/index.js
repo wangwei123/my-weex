@@ -77,7 +77,30 @@
 /***/ }),
 /* 1 */,
 /* 2 */,
-/* 3 */,
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * @author walid
+	 * @date 2017/3/4
+	 * @description 路由名字配置
+	 */
+
+	exports.default = {
+	  home: {
+	    title: '首页',
+	    path: '/home',
+	    jsPath: 'views/home/index',
+	    component: __webpack_require__(4)
+	  }
+	};
+
+/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -92,7 +115,7 @@
 	__vue_exports__ = __webpack_require__(6)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(7)
+	var __vue_template__ = __webpack_require__(12)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -126,108 +149,32 @@
 /***/ (function(module, exports) {
 
 	module.exports = {
-	  "cell": {
-	    "borderBottomWidth": 1,
-	    "borderBottomStyle": "solid",
-	    "borderBottomColor": "#E5E5E5"
-	  },
-	  "list": {
-	    "width": 750,
-	    "height": 960
-	  },
-	  "panel": {
-	    "width": 600,
-	    "height": 250,
-	    "marginLeft": 75,
-	    "marginTop": 35,
-	    "marginBottom": 35,
-	    "flexDirection": "column",
-	    "justifyContent": "center",
-	    "borderWidth": 2,
-	    "borderStyle": "solid",
-	    "borderColor": "rgb(162,217,192)",
-	    "backgroundColor": "rgba(162,217,192,0.2)"
-	  },
-	  "text": {
-	    "fontSize": 50,
-	    "textAlign": "center",
-	    "color": "#41B883"
+	  "content": {
+	    "position": "absolute",
+	    "top": 120,
+	    "left": 0,
+	    "right": 0,
+	    "bottom": 0,
+	    "marginTop": 0
 	  }
 	}
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+	var _route = __webpack_require__(3);
+
+	var _route2 = _interopRequireDefault(_route);
+
+	var _navigator = __webpack_require__(7);
+
+	var _navigator2 = _interopRequireDefault(_navigator);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	//
 	//
 	//
@@ -274,7 +221,25 @@
 	    navBarHeight: 88,
 	    title: '游戏盒子',
 	    lists: [1, 2, 3, 4, 5],
-	    showTabIndex: 0
+	    selectedIndex: 0,
+	    path0: _navigator2.default.getBaseUrl() + 'views/home/gamelist/gamelist0.js',
+	    path1: _navigator2.default.getBaseUrl() + 'views/home/gamelist/gamelist1.js',
+	    path2: _navigator2.default.getBaseUrl() + 'views/home/gamelist/gamelist2.js',
+	    path3: _navigator2.default.getBaseUrl() + 'views/home/gamelist/gamelist3.js'
+	  },
+	  computed: {
+	    displayStyle0: function displayStyle0() {
+	      return this.selectedIndex == 0 ? 'visible' : 'hidden';
+	    },
+	    displayStyle1: function displayStyle1() {
+	      return this.selectedIndex == 1 ? 'visible' : 'hidden';
+	    },
+	    displayStyle2: function displayStyle2() {
+	      return this.selectedIndex == 2 ? 'visible' : 'hidden';
+	    },
+	    displayStyle3: function displayStyle3() {
+	      return this.selectedIndex == 3 ? 'visible' : 'hidden';
+	    }
 	  },
 	  created: function created() {
 	    var env = this.$getConfig().env;
@@ -303,8 +268,10 @@
 	  },
 	  methods: {
 	    myhandler: function myhandler(index) {
-	      var el = this.$refs['tab' + index];
-	      dom.scrollToElement(el, {});
+	      this.selectedIndex = index;
+	      //modal.alert({'message': navigator.getBaseUrl() + 'views/home/gamelist/gamelist0.js'})
+	      //const el = this.$refs['tab' + index]
+	      //dom.scrollToElement(el, {})
 	      // modal.alert({'message': 'test' + index})
 	    },
 	    fetch: function fetch(event) {
@@ -323,6 +290,434 @@
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
+	                                                                                                                                                                                                                                                                               * @author walid
+	                                                                                                                                                                                                                                                                               * @date 2017/3/4
+	                                                                                                                                                                                                                                                                               * @description 界面跳转工具类
+	                                                                                                                                                                                                                                                                               */
+
+	var _qs = __webpack_require__(8);
+
+	var _qs2 = _interopRequireDefault(_qs);
+
+	var _config = __webpack_require__(10);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _instance = __webpack_require__(11);
+
+	var _instance2 = _interopRequireDefault(_instance);
+
+	var _route = __webpack_require__(3);
+
+	var _route2 = _interopRequireDefault(_route);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var navigator = weex.requireModule('navigator');
+
+	function getBaseUrl() {
+	  var bundleUrl = weex.config.bundleUrl;
+	  var isAndroidAssets = bundleUrl.indexOf('your_current_IP') >= 0 || bundleUrl.indexOf('file://assets/') >= 0;
+	  var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('.app') > 0;
+	  var nativeBase = '';
+	  if (isAndroidAssets) {
+	    nativeBase = 'file://assets/dist/weex/';
+	  } else if (isiOSAssets) {
+	    nativeBase = bundleUrl.substring(0, bundleUrl.lastIndexOf('weex/') + 5);
+	  } else {
+	    var host = _config2.default + ':8080';
+	    var matches = /\/\/([^\/]+?)\//.exec(bundleUrl);
+	    if (matches && matches.length >= 2) {
+	      host = matches[1];
+	    }
+	    nativeBase = 'http://' + host + '/dist/weex/';
+	  }
+	  var h5Base = '?page=../dist/web/';
+	  // // in Browser or WebView
+	  var inBrowserOrWebView = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object';
+	  return inBrowserOrWebView ? h5Base : nativeBase;
+	}
+
+	function pushWeb(url, query) {
+	  if (_instance2.default.isWeb()) {
+	    pushByUrl(url, query);
+	    return;
+	  }
+	  query = query ? query : {};
+	  query.url = url;
+	  push(_route2.default.web, query);
+	}
+
+	function pushByUrl(url, query) {
+	  navigator.push({
+	    url: query ? 'url?' + _qs2.default.stringify(query) : url,
+	    animated: 'true'
+	  }, function (event) {
+	    console.log('callback: ', event);
+	  });
+	}
+
+	function push(route) {
+	  var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+	  query.title = route.title | '';
+	  var url = query ? '' + getBaseUrl() + route.jsPath + '.js?' + _qs2.default.stringify(query) : '' + getBaseUrl() + route + '.js';
+	  navigator.push({
+	    url: url,
+	    animated: 'true'
+	  }, function (event) {
+	    console.log('callback: ', event);
+	  });
+	}
+
+	function pop() {
+	  navigator.pop({
+	    animated: 'true'
+	  }, function (event) {
+	    console.log('callback: ', event);
+	  });
+	}
+
+	exports.default = {
+	  push: push, pushByUrl: pushByUrl, getBaseUrl: getBaseUrl, pushWeb: pushWeb, pop: pop
+	};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	
+	module.exports = __webpack_require__(9);
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+	
+	/*!
+	 * querystring
+	 * Copyright(c) 2010 TJ Holowaychuk <tj@vision-media.ca>
+	 * MIT Licensed
+	 */
+
+	/**
+	 * Library version.
+	 */
+
+	exports.version = '0.4.2';
+
+	/**
+	 * Object#toString() ref for stringify().
+	 */
+
+	var toString = Object.prototype.toString;
+
+	/**
+	 * Cache non-integer test regexp.
+	 */
+
+	var isint = /^[0-9]+$/;
+
+	function promote(parent, key) {
+	  if (parent[key].length == 0) return parent[key] = {};
+	  var t = {};
+	  for (var i in parent[key]) t[i] = parent[key][i];
+	  parent[key] = t;
+	  return t;
+	}
+
+	function parse(parts, parent, key, val) {
+	  var part = parts.shift();
+	  // end
+	  if (!part) {
+	    if (Array.isArray(parent[key])) {
+	      parent[key].push(val);
+	    } else if ('object' == typeof parent[key]) {
+	      parent[key] = val;
+	    } else if ('undefined' == typeof parent[key]) {
+	      parent[key] = val;
+	    } else {
+	      parent[key] = [parent[key], val];
+	    }
+	    // array
+	  } else {
+	    var obj = parent[key] = parent[key] || [];
+	    if (']' == part) {
+	      if (Array.isArray(obj)) {
+	        if ('' != val) obj.push(val);
+	      } else if ('object' == typeof obj) {
+	        obj[Object.keys(obj).length] = val;
+	      } else {
+	        obj = parent[key] = [parent[key], val];
+	      }
+	      // prop
+	    } else if (~part.indexOf(']')) {
+	      part = part.substr(0, part.length - 1);
+	      if (!isint.test(part) && Array.isArray(obj)) obj = promote(parent, key);
+	      parse(parts, obj, part, val);
+	      // key
+	    } else {
+	      if (!isint.test(part) && Array.isArray(obj)) obj = promote(parent, key);
+	      parse(parts, obj, part, val);
+	    }
+	  }
+	}
+
+	/**
+	 * Merge parent key/val pair.
+	 */
+
+	function merge(parent, key, val){
+	  if (~key.indexOf(']')) {
+	    var parts = key.split('[')
+	      , len = parts.length
+	      , last = len - 1;
+	    parse(parts, parent, 'base', val);
+	    // optimize
+	  } else {
+	    if (!isint.test(key) && Array.isArray(parent.base)) {
+	      var t = {};
+	      for (var k in parent.base) t[k] = parent.base[k];
+	      parent.base = t;
+	    }
+	    set(parent.base, key, val);
+	  }
+
+	  return parent;
+	}
+
+	/**
+	 * Parse the given obj.
+	 */
+
+	function parseObject(obj){
+	  var ret = { base: {} };
+	  Object.keys(obj).forEach(function(name){
+	    merge(ret, name, obj[name]);
+	  });
+	  return ret.base;
+	}
+
+	/**
+	 * Parse the given str.
+	 */
+
+	function parseString(str){
+	  return String(str)
+	    .split('&')
+	    .reduce(function(ret, pair){
+	      try{
+	        pair = decodeURIComponent(pair.replace(/\+/g, ' '));
+	      } catch(e) {
+	        // ignore
+	      }
+
+	      var eql = pair.indexOf('=')
+	        , brace = lastBraceInKey(pair)
+	        , key = pair.substr(0, brace || eql)
+	        , val = pair.substr(brace || eql, pair.length)
+	        , val = val.substr(val.indexOf('=') + 1, val.length);
+
+	      // ?foo
+	      if ('' == key) key = pair, val = '';
+
+	      return merge(ret, key, val);
+	    }, { base: {} }).base;
+	}
+
+	/**
+	 * Parse the given query `str` or `obj`, returning an object.
+	 *
+	 * @param {String} str | {Object} obj
+	 * @return {Object}
+	 * @api public
+	 */
+
+	exports.parse = function(str){
+	  if (null == str || '' == str) return {};
+	  return 'object' == typeof str
+	    ? parseObject(str)
+	    : parseString(str);
+	};
+
+	/**
+	 * Turn the given `obj` into a query string
+	 *
+	 * @param {Object} obj
+	 * @return {String}
+	 * @api public
+	 */
+
+	var stringify = exports.stringify = function(obj, prefix) {
+	  if (Array.isArray(obj)) {
+	    return stringifyArray(obj, prefix);
+	  } else if ('[object Object]' == toString.call(obj)) {
+	    return stringifyObject(obj, prefix);
+	  } else if ('string' == typeof obj) {
+	    return stringifyString(obj, prefix);
+	  } else {
+	    return prefix + '=' + obj;
+	  }
+	};
+
+	/**
+	 * Stringify the given `str`.
+	 *
+	 * @param {String} str
+	 * @param {String} prefix
+	 * @return {String}
+	 * @api private
+	 */
+
+	function stringifyString(str, prefix) {
+	  if (!prefix) throw new TypeError('stringify expects an object');
+	  return prefix + '=' + encodeURIComponent(str);
+	}
+
+	/**
+	 * Stringify the given `arr`.
+	 *
+	 * @param {Array} arr
+	 * @param {String} prefix
+	 * @return {String}
+	 * @api private
+	 */
+
+	function stringifyArray(arr, prefix) {
+	  var ret = [];
+	  if (!prefix) throw new TypeError('stringify expects an object');
+	  for (var i = 0; i < arr.length; i++) {
+	    ret.push(stringify(arr[i], prefix + '[]'));
+	  }
+	  return ret.join('&');
+	}
+
+	/**
+	 * Stringify the given `obj`.
+	 *
+	 * @param {Object} obj
+	 * @param {String} prefix
+	 * @return {String}
+	 * @api private
+	 */
+
+	function stringifyObject(obj, prefix) {
+	  var ret = []
+	    , keys = Object.keys(obj)
+	    , key;
+
+	  for (var i = 0, len = keys.length; i < len; ++i) {
+	    key = keys[i];
+	    ret.push(stringify(obj[key], prefix
+	      ? prefix + '[' + encodeURIComponent(key) + ']'
+	      : encodeURIComponent(key)));
+	  }
+
+	  return ret.join('&');
+	}
+
+	/**
+	 * Set `obj`'s `key` to `val` respecting
+	 * the weird and wonderful syntax of a qs,
+	 * where "foo=bar&foo=baz" becomes an array.
+	 *
+	 * @param {Object} obj
+	 * @param {String} key
+	 * @param {String} val
+	 * @api private
+	 */
+
+	function set(obj, key, val) {
+	  var v = obj[key];
+	  if (undefined === v) {
+	    obj[key] = val;
+	  } else if (Array.isArray(v)) {
+	    v.push(val);
+	  } else {
+	    obj[key] = [v, val];
+	  }
+	}
+
+	/**
+	 * Locate last brace in `str` within the key.
+	 *
+	 * @param {String} str
+	 * @return {Number}
+	 * @api private
+	 */
+
+	function lastBraceInKey(str) {
+	  var len = str.length
+	    , brace
+	    , c;
+	  for (var i = 0; i < len; ++i) {
+	    c = str[i];
+	    if (']' == c) brace = false;
+	    if ('[' == c) brace = true;
+	    if ('=' == c && !brace) return i;
+	  }
+	}
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = '192.168.0.105';
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * @Author   : walid
+	 * @Data     : 2017-03-20  18:32
+	 * @Describe : 封装weex实例对象
+	 */
+
+	function isIOS() {
+	  return weex.config.env ? weex.config.env.platform === 'iOS' : false;
+	}
+
+	function isWeb() {
+	  return weex.config.platform === 'Web';
+	}
+
+	function getDeviceInfo() {
+	  var env = weex.config.env;
+	  var deviceWidth = env.deviceWidth;
+	  var deviceHeight = env.deviceHeight;
+	  return {
+	    deviceWidth: deviceWidth,
+	    deviceHeight: deviceHeight
+	  };
+	}
+
+	exports.default = {
+	  isIOS: isIOS, isWeb: isWeb, getDeviceInfo: getDeviceInfo
+	};
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -376,211 +771,55 @@
 	        _vm.myhandler(3)
 	      }
 	    }
-	  }, [_vm._v("H5游戏")])], 1), _c('scroller', {
-	    attrs: {
-	      "scrollDirection": "horizontal"
-	    }
-	  }, [_c('list', {
-	    ref: "tab0",
-	    staticClass: ["list"],
-	    attrs: {
-	      "loadmoreoffset": "10"
-	    },
-	    on: {
-	      "loadmore": _vm.fetch
-	    }
-	  }, [_c('cell', {
-	    staticClass: ["cell"],
-	    appendAsTree: true,
-	    attrs: {
-	      "append": "tree"
-	    }
-	  }, [_c('div', {
-	    staticStyle: {
-	      flexDirection: "row",
-	      marginTop: "10px",
-	      marginBottom: "10px"
-	    }
-	  }, [_c('image', {
-	    staticStyle: {
-	      width: "100px",
-	      height: "100px",
-	      marginLeft: "20px"
+	  }, [_vm._v("H5游戏")])], 1), _c('embed', {
+	    key: "0",
+	    staticClass: ["content"],
+	    style: {
+	      visibility: _vm.selectedIndex == 0 ? 'visible' : 'hidden'
 	    },
 	    attrs: {
-	      "src": "http://f1.img4399.com/ma~a_26444~105x105?1490663772"
+	      "src": _vm.path0,
+	      ",": "",
+	      "type": "weex"
 	    }
-	  }), _c('div', {
-	    staticStyle: {
-	      flexDirection: "column",
-	      marginLeft: "30px",
-	      justifyContent: "center"
-	    }
-	  }, [_c('text', {
-	    staticStyle: {
-	      fontSize: "28px"
-	    }
-	  }, [_vm._v("梦幻西游OL")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("5665下载  196M")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("回合制游戏")])])])]), _c('cell', {
-	    staticClass: ["cell"],
-	    appendAsTree: true,
-	    attrs: {
-	      "append": "tree"
-	    }
-	  }, [_c('div', {
-	    staticStyle: {
-	      flexDirection: "row",
-	      marginTop: "10px",
-	      marginBottom: "10px"
-	    }
-	  }, [_c('image', {
-	    staticStyle: {
-	      width: "100px",
-	      height: "100px",
-	      marginLeft: "20px"
+	  }), _c('embed', {
+	    key: "1",
+	    staticClass: ["content"],
+	    style: {
+	      visibility: _vm.selectedIndex == 1 ? 'visible' : 'hidden'
 	    },
 	    attrs: {
-	      "src": "http://f1.img4399.com/ma~a_big_105875~250x250?1491371648"
+	      "src": _vm.path1,
+	      ",": "",
+	      "type": "weex"
 	    }
-	  }), _c('div', {
-	    staticStyle: {
-	      flexDirection: "column",
-	      marginLeft: "30px",
-	      justifyContent: "center"
-	    }
-	  }, [_c('text', {
-	    staticStyle: {
-	      fontSize: "28px"
-	    }
-	  }, [_vm._v("九阳神功:起源")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("5665下载  196M")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("回合制游戏")])])])]), _c('cell', {
-	    staticClass: ["cell"],
-	    appendAsTree: true,
-	    attrs: {
-	      "append": "tree"
-	    }
-	  }, [_c('div', {
-	    staticStyle: {
-	      flexDirection: "row",
-	      marginTop: "10px",
-	      marginBottom: "10px"
-	    }
-	  }, [_c('image', {
-	    staticStyle: {
-	      width: "100px",
-	      height: "100px",
-	      marginLeft: "20px"
+	  }), _c('embed', {
+	    key: "2",
+	    staticClass: ["content"],
+	    style: {
+	      visibility: _vm.selectedIndex == 2 ? 'visible' : 'hidden'
 	    },
 	    attrs: {
-	      "src": "http://f1.img4399.com/ma~a_big_93079~250x250?1490593729"
+	      "src": _vm.path2,
+	      ",": "",
+	      "type": "weex"
 	    }
-	  }), _c('div', {
-	    staticStyle: {
-	      flexDirection: "column",
-	      marginLeft: "30px",
-	      justifyContent: "center"
-	    }
-	  }, [_c('text', {
-	    staticStyle: {
-	      fontSize: "28px"
-	    }
-	  }, [_vm._v("部落冲突:皇室战争")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("5665下载  196M")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("回合制游戏")])])])])]), _c('list', {
-	    ref: "tab1",
-	    staticClass: ["list"],
-	    attrs: {
-	      "loadmoreoffset": "10"
+	  }), _c('embed', {
+	    key: "3",
+	    staticClass: ["content"],
+	    style: {
+	      visibility: _vm.selectedIndex == 3 ? 'visible' : 'hidden'
 	    },
-	    on: {
-	      "loadmore": _vm.fetch
-	    }
-	  }, _vm._l((_vm.lists), function(num) {
-	    return _c('cell', {
-	      staticClass: ["cell"],
-	      appendAsTree: true,
-	      attrs: {
-	        "append": "tree"
-	      }
-	    }, [_c('div', {
-	      staticClass: ["panel"]
-	    }, [_c('text', {
-	      staticClass: ["text"]
-	    }, [_vm._v("text" + _vm._s(num))])])])
-	  })), _c('list', {
-	    ref: "tab2",
-	    staticClass: ["list"],
 	    attrs: {
-	      "tabIndex": "1",
-	      "loadmoreoffset": "10"
-	    },
-	    on: {
-	      "loadmore": _vm.fetch
+	      "src": _vm.path3,
+	      ",": "",
+	      "type": "weex"
 	    }
-	  }, _vm._l((_vm.lists), function(num) {
-	    return _c('cell', {
-	      staticClass: ["cell"],
-	      appendAsTree: true,
-	      attrs: {
-	        "append": "tree"
-	      }
-	    }, [_c('div', {
-	      staticClass: ["panel"]
-	    }, [_c('text', {
-	      staticClass: ["text"]
-	    }, [_vm._v("content" + _vm._s(num))])])])
-	  })), _c('list', {
-	    ref: "tab3",
-	    staticClass: ["list"],
-	    attrs: {
-	      "tabIndex": "1",
-	      "loadmoreoffset": "10"
-	    },
-	    on: {
-	      "loadmore": _vm.fetch
-	    }
-	  }, _vm._l((_vm.lists), function(num) {
-	    return _c('cell', {
-	      staticClass: ["cell"],
-	      appendAsTree: true,
-	      attrs: {
-	        "append": "tree"
-	      }
-	    }, [_c('div', {
-	      staticClass: ["panel"]
-	    }, [_c('text', {
-	      staticClass: ["text"]
-	    }, [_vm._v("content" + _vm._s(num))])])])
-	  }))])], 1)
+	  })], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
 /***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
 /* 13 */,
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2471,7 +2710,6 @@
 	//
 	//
 
-	var modal = weex.requireModule('modal');
 	module.exports = {
 	  mixins: [_multiItems.parentMixin],
 	  props: {
@@ -2522,8 +2760,8 @@
 	  },
 	  methods: {
 	    move: function move() {
-	      var barlineEl = this.$refs.barline;
-	      animation.transition(barlineEl, {
+	      var lineEl = this.$refs.line;
+	      animation.transition(lineEl, {
 	        styles: {
 	          transform: 'translate(' + this.left + 'px, 0px)',
 	          transformOrigin: 'center center'
@@ -2531,9 +2769,7 @@
 	        duration: 200, //ms
 	        timingFunction: 'ease',
 	        delay: 0 //ms
-	      }, function () {
-	        // modal.toast({ message: 'animation finished.' })
-	      });
+	      }, function () {});
 	    }
 	  }
 	};
@@ -2643,7 +2879,7 @@
 	  }, [_c('div', {
 	    style: _vm.barStyle
 	  }, [_vm._t("default")], 2), (_vm.displayline) ? _c('div', [_c('div', {
-	    ref: "barline",
+	    ref: "line",
 	    style: _vm.lineStyle
 	  })]) : _vm._e()])
 	},staticRenderFns: []}

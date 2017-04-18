@@ -11,96 +11,31 @@
       <wx-tab-item @onItemClick="myhandler(2)">手游</wx-tab-item>
       <wx-tab-item @onItemClick="myhandler(3)">H5游戏</wx-tab-item>
   </wx-tab>
-
-  <scroller scroll-direction="horizontal">
-    <list ref="tab0"  class="list" @loadmore="fetch" loadmoreoffset="10">
-      <cell class="cell">
-        <div style="flex-direction:row;margin-top:10px;margin-bottom:10px;">
-          <image style="width:100px;height:100px;margin-left:20px;" src="http://f1.img4399.com/ma~a_26444~105x105?1490663772"></image>
-          <div style="flex-direction:column;margin-left:30px;justify-content:center;">
-            <text style="font-size:28px;">梦幻西游OL</text>
-            <text style="font-size:24px;">5665下载  196M</text>
-            <text style="font-size:24px;">回合制游戏</text>
-          </div>
-        </div>
-      </cell>
-      <cell class="cell">
-        <div style="flex-direction:row;margin-top:10px;margin-bottom:10px;">
-          <image style="width:100px;height:100px;margin-left:20px;" src="http://f1.img4399.com/ma~a_big_105875~250x250?1491371648"></image>
-          <div style="flex-direction:column;margin-left:30px;justify-content:center;">
-            <text style="font-size:28px;">九阳神功:起源</text>
-            <text style="font-size:24px;">5665下载  196M</text>
-            <text style="font-size:24px;">回合制游戏</text>
-          </div>
-        </div>
-      </cell>
-      <cell class="cell">
-        <div style="flex-direction:row;margin-top:10px;margin-bottom:10px;">
-          <image style="width:100px;height:100px;margin-left:20px;" src="http://f1.img4399.com/ma~a_big_93079~250x250?1490593729"></image>
-          <div style="flex-direction:column;margin-left:30px;justify-content:center;">
-            <text style="font-size:28px;">部落冲突:皇室战争</text>
-            <text style="font-size:24px;">5665下载  196M</text>
-            <text style="font-size:24px;">回合制游戏</text>
-          </div>
-        </div>
-      </cell>
-    </list>
-    <list ref="tab1" class="list" @loadmore="fetch" loadmoreoffset="10">
-      <cell class="cell" v-for="num in lists">
-        <div class="panel">
-          <text class="text">text{{num}}</text>
-        </div>
-      </cell>
-    </list>
-    <list ref="tab2" tabIndex="1" class="list" @loadmore="fetch" loadmoreoffset="10">
-      <cell class="cell" v-for="num in lists">
-        <div class="panel">
-          <text class="text">content{{num}}</text>
-        </div>
-      </cell>
-    </list>
-    <list ref="tab3" tabIndex="1" class="list" @loadmore="fetch" loadmoreoffset="10">
-      <cell class="cell" v-for="num in lists">
-        <div class="panel">
-          <text class="text">content{{num}}</text>
-        </div>
-      </cell>
-    </list>
-  </scroller>
+  <embed class="content" :style="{visibility:selectedIndex == 0 ? 'visible':'hidden'}"
+    :src="path0", key="0" type="weex"></embed>
+  <embed class="content" :style="{visibility:selectedIndex == 1 ? 'visible':'hidden'}"
+    :src="path1", key="1" type="weex"></embed>
+  <embed class="content" :style="{visibility:selectedIndex == 2 ? 'visible':'hidden'}"
+    :src="path2", key="2" type="weex"></embed>
+  <embed class="content" :style="{visibility:selectedIndex == 3 ? 'visible':'hidden'}"
+    :src="path3", key="3" type="weex"></embed>
  </wx-navpage>
 </template>
 
 <style scoped>
-.cell {
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: #E5E5E5;
+.content {
+    position: absolute;
+    top: 120;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 0;
 }
-.list {
-  width: 750;
-  height: 960;
-}
-.panel {
-   width: 600px;
-   height: 250px;
-   margin-left: 75px;
-   margin-top: 35px;
-   margin-bottom: 35px;
-   flex-direction: column;
-   justify-content: center;
-   border-width: 2px;
-   border-style: solid;
-   border-color: rgb(162, 217, 192);
-   background-color: rgba(162, 217, 192, 0.2);
- }
- .text {
-   font-size: 50px;
-   text-align: center;
-   color: #41B883;
- }
 </style>
 
 <script>
+  import route from 'router/route'
+  import navigator from 'utils/modules/navigator'
   const animation = weex.requireModule('animation')
   const modal = weex.requireModule('modal')
   const dom = weex.requireModule('dom')
@@ -111,7 +46,25 @@
       navBarHeight: 88,
       title: '游戏盒子',
       lists: [1, 2, 3, 4, 5],
-      showTabIndex: 0
+      selectedIndex: 0,
+      path0: (navigator.getBaseUrl() + 'views/home/gamelist/gamelist0.js'),
+      path1: (navigator.getBaseUrl() + 'views/home/gamelist/gamelist1.js'),
+      path2: (navigator.getBaseUrl() + 'views/home/gamelist/gamelist2.js'),
+      path3: (navigator.getBaseUrl() + 'views/home/gamelist/gamelist3.js')
+    },
+    computed: {
+      displayStyle0() {
+        return this.selectedIndex == 0 ? 'visible':'hidden'
+      },
+      displayStyle1() {
+        return this.selectedIndex == 1 ? 'visible':'hidden'
+      },
+      displayStyle2() {
+        return this.selectedIndex == 2 ? 'visible':'hidden'
+      },
+      displayStyle3() {
+        return this.selectedIndex == 3 ? 'visible':'hidden'
+      }
     },
     created: function() {
       let env = this.$getConfig().env
@@ -140,8 +93,10 @@
     },
     methods: {
       myhandler: function(index) {
-        const el = this.$refs['tab' + index]
-        dom.scrollToElement(el, {})
+        this.selectedIndex = index
+        //modal.alert({'message': navigator.getBaseUrl() + 'views/home/gamelist/gamelist0.js'})
+        //const el = this.$refs['tab' + index]
+        //dom.scrollToElement(el, {})
         // modal.alert({'message': 'test' + index})
       },
       fetch (event) {

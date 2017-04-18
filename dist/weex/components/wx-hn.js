@@ -1977,7 +1977,6 @@
 	//
 	//
 
-	var modal = weex.requireModule('modal');
 	module.exports = {
 	  mixins: [_multiItems.parentMixin],
 	  props: {
@@ -2028,8 +2027,8 @@
 	  },
 	  methods: {
 	    move: function move() {
-	      var barlineEl = this.$refs.barline;
-	      animation.transition(barlineEl, {
+	      var lineEl = this.$refs.line;
+	      animation.transition(lineEl, {
 	        styles: {
 	          transform: 'translate(' + this.left + 'px, 0px)',
 	          transformOrigin: 'center center'
@@ -2037,9 +2036,7 @@
 	        duration: 200, //ms
 	        timingFunction: 'ease',
 	        delay: 0 //ms
-	      }, function () {
-	        // modal.toast({ message: 'animation finished.' })
-	      });
+	      }, function () {});
 	    }
 	  }
 	};
@@ -2149,7 +2146,7 @@
 	  }, [_c('div', {
 	    style: _vm.barStyle
 	  }, [_vm._t("default")], 2), (_vm.displayline) ? _c('div', [_c('div', {
-	    ref: "barline",
+	    ref: "line",
 	    style: _vm.lineStyle
 	  })]) : _vm._e()])
 	},staticRenderFns: []}

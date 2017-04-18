@@ -55,7 +55,6 @@
         ]
       }
     },
-
     methods: {
       tabBarOnClick (e) {
         console.log('tabBarOnClick', e.index)

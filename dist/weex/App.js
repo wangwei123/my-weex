@@ -127,7 +127,7 @@
 
 	var _route2 = _interopRequireDefault(_route);
 
-	var _navigator = __webpack_require__(8);
+	var _navigator = __webpack_require__(7);
 
 	var _navigator2 = _interopRequireDefault(_navigator);
 
@@ -183,7 +183,6 @@
 	    };
 	  },
 
-
 	  methods: {
 	    tabBarOnClick: function tabBarOnClick(e) {
 	      console.log('tabBarOnClick', e.index);
@@ -230,7 +229,7 @@
 	__vue_exports__ = __webpack_require__(6)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(7)
+	var __vue_template__ = __webpack_require__(12)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -264,108 +263,32 @@
 /***/ (function(module, exports) {
 
 	module.exports = {
-	  "cell": {
-	    "borderBottomWidth": 1,
-	    "borderBottomStyle": "solid",
-	    "borderBottomColor": "#E5E5E5"
-	  },
-	  "list": {
-	    "width": 750,
-	    "height": 960
-	  },
-	  "panel": {
-	    "width": 600,
-	    "height": 250,
-	    "marginLeft": 75,
-	    "marginTop": 35,
-	    "marginBottom": 35,
-	    "flexDirection": "column",
-	    "justifyContent": "center",
-	    "borderWidth": 2,
-	    "borderStyle": "solid",
-	    "borderColor": "rgb(162,217,192)",
-	    "backgroundColor": "rgba(162,217,192,0.2)"
-	  },
-	  "text": {
-	    "fontSize": 50,
-	    "textAlign": "center",
-	    "color": "#41B883"
+	  "content": {
+	    "position": "absolute",
+	    "top": 120,
+	    "left": 0,
+	    "right": 0,
+	    "bottom": 0,
+	    "marginTop": 0
 	  }
 	}
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+	var _route = __webpack_require__(3);
+
+	var _route2 = _interopRequireDefault(_route);
+
+	var _navigator = __webpack_require__(7);
+
+	var _navigator2 = _interopRequireDefault(_navigator);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	//
 	//
 	//
@@ -412,7 +335,25 @@
 	    navBarHeight: 88,
 	    title: '游戏盒子',
 	    lists: [1, 2, 3, 4, 5],
-	    showTabIndex: 0
+	    selectedIndex: 0,
+	    path0: _navigator2.default.getBaseUrl() + 'views/home/gamelist/gamelist0.js',
+	    path1: _navigator2.default.getBaseUrl() + 'views/home/gamelist/gamelist1.js',
+	    path2: _navigator2.default.getBaseUrl() + 'views/home/gamelist/gamelist2.js',
+	    path3: _navigator2.default.getBaseUrl() + 'views/home/gamelist/gamelist3.js'
+	  },
+	  computed: {
+	    displayStyle0: function displayStyle0() {
+	      return this.selectedIndex == 0 ? 'visible' : 'hidden';
+	    },
+	    displayStyle1: function displayStyle1() {
+	      return this.selectedIndex == 1 ? 'visible' : 'hidden';
+	    },
+	    displayStyle2: function displayStyle2() {
+	      return this.selectedIndex == 2 ? 'visible' : 'hidden';
+	    },
+	    displayStyle3: function displayStyle3() {
+	      return this.selectedIndex == 3 ? 'visible' : 'hidden';
+	    }
 	  },
 	  created: function created() {
 	    var env = this.$getConfig().env;
@@ -441,8 +382,10 @@
 	  },
 	  methods: {
 	    myhandler: function myhandler(index) {
-	      var el = this.$refs['tab' + index];
-	      dom.scrollToElement(el, {});
+	      this.selectedIndex = index;
+	      //modal.alert({'message': navigator.getBaseUrl() + 'views/home/gamelist/gamelist0.js'})
+	      //const el = this.$refs['tab' + index]
+	      //dom.scrollToElement(el, {})
 	      // modal.alert({'message': 'test' + index})
 	    },
 	    fetch: function fetch(event) {
@@ -461,260 +404,6 @@
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('wx-navpage', {
-	    staticClass: ["wx-navpage"],
-	    attrs: {
-	      "dataRole": "none",
-	      "backgroundColor": "#FF4500",
-	      "title": _vm.title,
-	      "titleColor": "white",
-	      "rightItemSrc": "http://gtms02.alicdn.com/tps/i2/TB1ED7iMpXXXXXEXXXXWA_BHXXX-48-48.png"
-	    }
-	  }, [_c('wx-tab', {
-	    attrs: {
-	      "fontSize": "28",
-	      "height": "70",
-	      "activeColor": "#FF4500",
-	      "lineActiveColor": "#FF4500",
-	      "displayline": true
-	    },
-	    model: {
-	      value: (_vm.index),
-	      callback: function(value) {
-	        _vm.index = value
-	      }
-	    }
-	  }, [_c('wx-tab-item', {
-	    attrs: {
-	      "selected": ""
-	    },
-	    on: {
-	      "onItemClick": function($event) {
-	        _vm.myhandler(0)
-	      }
-	    }
-	  }, [_vm._v("新游推荐")]), _c('wx-tab-item', {
-	    on: {
-	      "onItemClick": function($event) {
-	        _vm.myhandler(1)
-	      }
-	    }
-	  }, [_vm._v("排行榜")]), _c('wx-tab-item', {
-	    on: {
-	      "onItemClick": function($event) {
-	        _vm.myhandler(2)
-	      }
-	    }
-	  }, [_vm._v("手游")]), _c('wx-tab-item', {
-	    on: {
-	      "onItemClick": function($event) {
-	        _vm.myhandler(3)
-	      }
-	    }
-	  }, [_vm._v("H5游戏")])], 1), _c('scroller', {
-	    attrs: {
-	      "scrollDirection": "horizontal"
-	    }
-	  }, [_c('list', {
-	    ref: "tab0",
-	    staticClass: ["list"],
-	    attrs: {
-	      "loadmoreoffset": "10"
-	    },
-	    on: {
-	      "loadmore": _vm.fetch
-	    }
-	  }, [_c('cell', {
-	    staticClass: ["cell"],
-	    appendAsTree: true,
-	    attrs: {
-	      "append": "tree"
-	    }
-	  }, [_c('div', {
-	    staticStyle: {
-	      flexDirection: "row",
-	      marginTop: "10px",
-	      marginBottom: "10px"
-	    }
-	  }, [_c('image', {
-	    staticStyle: {
-	      width: "100px",
-	      height: "100px",
-	      marginLeft: "20px"
-	    },
-	    attrs: {
-	      "src": "http://f1.img4399.com/ma~a_26444~105x105?1490663772"
-	    }
-	  }), _c('div', {
-	    staticStyle: {
-	      flexDirection: "column",
-	      marginLeft: "30px",
-	      justifyContent: "center"
-	    }
-	  }, [_c('text', {
-	    staticStyle: {
-	      fontSize: "28px"
-	    }
-	  }, [_vm._v("梦幻西游OL")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("5665下载  196M")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("回合制游戏")])])])]), _c('cell', {
-	    staticClass: ["cell"],
-	    appendAsTree: true,
-	    attrs: {
-	      "append": "tree"
-	    }
-	  }, [_c('div', {
-	    staticStyle: {
-	      flexDirection: "row",
-	      marginTop: "10px",
-	      marginBottom: "10px"
-	    }
-	  }, [_c('image', {
-	    staticStyle: {
-	      width: "100px",
-	      height: "100px",
-	      marginLeft: "20px"
-	    },
-	    attrs: {
-	      "src": "http://f1.img4399.com/ma~a_big_105875~250x250?1491371648"
-	    }
-	  }), _c('div', {
-	    staticStyle: {
-	      flexDirection: "column",
-	      marginLeft: "30px",
-	      justifyContent: "center"
-	    }
-	  }, [_c('text', {
-	    staticStyle: {
-	      fontSize: "28px"
-	    }
-	  }, [_vm._v("九阳神功:起源")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("5665下载  196M")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("回合制游戏")])])])]), _c('cell', {
-	    staticClass: ["cell"],
-	    appendAsTree: true,
-	    attrs: {
-	      "append": "tree"
-	    }
-	  }, [_c('div', {
-	    staticStyle: {
-	      flexDirection: "row",
-	      marginTop: "10px",
-	      marginBottom: "10px"
-	    }
-	  }, [_c('image', {
-	    staticStyle: {
-	      width: "100px",
-	      height: "100px",
-	      marginLeft: "20px"
-	    },
-	    attrs: {
-	      "src": "http://f1.img4399.com/ma~a_big_93079~250x250?1490593729"
-	    }
-	  }), _c('div', {
-	    staticStyle: {
-	      flexDirection: "column",
-	      marginLeft: "30px",
-	      justifyContent: "center"
-	    }
-	  }, [_c('text', {
-	    staticStyle: {
-	      fontSize: "28px"
-	    }
-	  }, [_vm._v("部落冲突:皇室战争")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("5665下载  196M")]), _c('text', {
-	    staticStyle: {
-	      fontSize: "24px"
-	    }
-	  }, [_vm._v("回合制游戏")])])])])]), _c('list', {
-	    ref: "tab1",
-	    staticClass: ["list"],
-	    attrs: {
-	      "loadmoreoffset": "10"
-	    },
-	    on: {
-	      "loadmore": _vm.fetch
-	    }
-	  }, _vm._l((_vm.lists), function(num) {
-	    return _c('cell', {
-	      staticClass: ["cell"],
-	      appendAsTree: true,
-	      attrs: {
-	        "append": "tree"
-	      }
-	    }, [_c('div', {
-	      staticClass: ["panel"]
-	    }, [_c('text', {
-	      staticClass: ["text"]
-	    }, [_vm._v("text" + _vm._s(num))])])])
-	  })), _c('list', {
-	    ref: "tab2",
-	    staticClass: ["list"],
-	    attrs: {
-	      "tabIndex": "1",
-	      "loadmoreoffset": "10"
-	    },
-	    on: {
-	      "loadmore": _vm.fetch
-	    }
-	  }, _vm._l((_vm.lists), function(num) {
-	    return _c('cell', {
-	      staticClass: ["cell"],
-	      appendAsTree: true,
-	      attrs: {
-	        "append": "tree"
-	      }
-	    }, [_c('div', {
-	      staticClass: ["panel"]
-	    }, [_c('text', {
-	      staticClass: ["text"]
-	    }, [_vm._v("content" + _vm._s(num))])])])
-	  })), _c('list', {
-	    ref: "tab3",
-	    staticClass: ["list"],
-	    attrs: {
-	      "tabIndex": "1",
-	      "loadmoreoffset": "10"
-	    },
-	    on: {
-	      "loadmore": _vm.fetch
-	    }
-	  }, _vm._l((_vm.lists), function(num) {
-	    return _c('cell', {
-	      staticClass: ["cell"],
-	      appendAsTree: true,
-	      attrs: {
-	        "append": "tree"
-	      }
-	    }, [_c('div', {
-	      staticClass: ["panel"]
-	    }, [_c('text', {
-	      staticClass: ["text"]
-	    }, [_vm._v("content" + _vm._s(num))])])])
-	  }))])], 1)
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -729,15 +418,15 @@
 	                                                                                                                                                                                                                                                                               * @description 界面跳转工具类
 	                                                                                                                                                                                                                                                                               */
 
-	var _qs = __webpack_require__(9);
+	var _qs = __webpack_require__(8);
 
 	var _qs2 = _interopRequireDefault(_qs);
 
-	var _config = __webpack_require__(11);
+	var _config = __webpack_require__(10);
 
 	var _config2 = _interopRequireDefault(_config);
 
-	var _instance = __webpack_require__(12);
+	var _instance = __webpack_require__(11);
 
 	var _instance2 = _interopRequireDefault(_instance);
 
@@ -817,14 +506,14 @@
 	};
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	
-	module.exports = __webpack_require__(10);
+	module.exports = __webpack_require__(9);
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports) {
 
 	
@@ -1094,7 +783,7 @@
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1105,7 +794,7 @@
 	exports.default = '192.168.0.105';
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1140,6 +829,109 @@
 	exports.default = {
 	  isIOS: isIOS, isWeb: isWeb, getDeviceInfo: getDeviceInfo
 	};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('wx-navpage', {
+	    staticClass: ["wx-navpage"],
+	    attrs: {
+	      "dataRole": "none",
+	      "backgroundColor": "#FF4500",
+	      "title": _vm.title,
+	      "titleColor": "white",
+	      "rightItemSrc": "http://gtms02.alicdn.com/tps/i2/TB1ED7iMpXXXXXEXXXXWA_BHXXX-48-48.png"
+	    }
+	  }, [_c('wx-tab', {
+	    attrs: {
+	      "fontSize": "28",
+	      "height": "70",
+	      "activeColor": "#FF4500",
+	      "lineActiveColor": "#FF4500",
+	      "displayline": true
+	    },
+	    model: {
+	      value: (_vm.index),
+	      callback: function(value) {
+	        _vm.index = value
+	      }
+	    }
+	  }, [_c('wx-tab-item', {
+	    attrs: {
+	      "selected": ""
+	    },
+	    on: {
+	      "onItemClick": function($event) {
+	        _vm.myhandler(0)
+	      }
+	    }
+	  }, [_vm._v("新游推荐")]), _c('wx-tab-item', {
+	    on: {
+	      "onItemClick": function($event) {
+	        _vm.myhandler(1)
+	      }
+	    }
+	  }, [_vm._v("排行榜")]), _c('wx-tab-item', {
+	    on: {
+	      "onItemClick": function($event) {
+	        _vm.myhandler(2)
+	      }
+	    }
+	  }, [_vm._v("手游")]), _c('wx-tab-item', {
+	    on: {
+	      "onItemClick": function($event) {
+	        _vm.myhandler(3)
+	      }
+	    }
+	  }, [_vm._v("H5游戏")])], 1), _c('embed', {
+	    key: "0",
+	    staticClass: ["content"],
+	    style: {
+	      visibility: _vm.selectedIndex == 0 ? 'visible' : 'hidden'
+	    },
+	    attrs: {
+	      "src": _vm.path0,
+	      ",": "",
+	      "type": "weex"
+	    }
+	  }), _c('embed', {
+	    key: "1",
+	    staticClass: ["content"],
+	    style: {
+	      visibility: _vm.selectedIndex == 1 ? 'visible' : 'hidden'
+	    },
+	    attrs: {
+	      "src": _vm.path1,
+	      ",": "",
+	      "type": "weex"
+	    }
+	  }), _c('embed', {
+	    key: "2",
+	    staticClass: ["content"],
+	    style: {
+	      visibility: _vm.selectedIndex == 2 ? 'visible' : 'hidden'
+	    },
+	    attrs: {
+	      "src": _vm.path2,
+	      ",": "",
+	      "type": "weex"
+	    }
+	  }), _c('embed', {
+	    key: "3",
+	    staticClass: ["content"],
+	    style: {
+	      visibility: _vm.selectedIndex == 3 ? 'visible' : 'hidden'
+	    },
+	    attrs: {
+	      "src": _vm.path3,
+	      ",": "",
+	      "type": "weex"
+	    }
+	  })], 1)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
 
 /***/ }),
 /* 13 */
@@ -3051,7 +2843,6 @@
 	//
 	//
 
-	var modal = weex.requireModule('modal');
 	module.exports = {
 	  mixins: [_multiItems.parentMixin],
 	  props: {
@@ -3102,8 +2893,8 @@
 	  },
 	  methods: {
 	    move: function move() {
-	      var barlineEl = this.$refs.barline;
-	      animation.transition(barlineEl, {
+	      var lineEl = this.$refs.line;
+	      animation.transition(lineEl, {
 	        styles: {
 	          transform: 'translate(' + this.left + 'px, 0px)',
 	          transformOrigin: 'center center'
@@ -3111,9 +2902,7 @@
 	        duration: 200, //ms
 	        timingFunction: 'ease',
 	        delay: 0 //ms
-	      }, function () {
-	        // modal.toast({ message: 'animation finished.' })
-	      });
+	      }, function () {});
 	    }
 	  }
 	};
@@ -3223,7 +3012,7 @@
 	  }, [_c('div', {
 	    style: _vm.barStyle
 	  }, [_vm._t("default")], 2), (_vm.displayline) ? _c('div', [_c('div', {
-	    ref: "barline",
+	    ref: "line",
 	    style: _vm.lineStyle
 	  })]) : _vm._e()])
 	},staticRenderFns: []}

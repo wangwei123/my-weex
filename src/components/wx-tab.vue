@@ -4,7 +4,7 @@
      <slot></slot>
    </div>
    <div v-if="displayline">
-     <div ref="barline" :style="lineStyle">
+     <div ref="line" :style="lineStyle">
      </div>
    </div>
  </div>
@@ -13,7 +13,6 @@
 <script>
   import { parentMixin } from '../mixins/multi-items'
   const animation = weex.requireModule('animation')
-  const modal = weex.requireModule('modal')
   module.exports = {
     mixins: [parentMixin],
     props: {
@@ -63,8 +62,8 @@
     },
     methods: {
       move: function() {
-        let barlineEl = this.$refs.barline
-        animation.transition(barlineEl, {
+        let lineEl = this.$refs.line
+        animation.transition(lineEl, {
           styles: {
             transform: 'translate('+ this.left +'px, 0px)',
             transformOrigin: 'center center'
@@ -73,7 +72,7 @@
           timingFunction: 'ease',
           delay: 0 //ms
         }, function () {
-          // modal.toast({ message: 'animation finished.' })
+
         })
       }
     }
