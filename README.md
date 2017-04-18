@@ -1,5 +1,7 @@
-## weex-vue
-将weex官方的.we组件修改为.vue组件，并开发了一些其他组件.
+## my-weex
+1. 基于weex和vue2.0，支持weex和weexpack构建工具.
+2. 将weex官方的.we组件修改为.vue组件，并开发了一些其他组件
+3. 对组件在iOS和android平台的兼容性做了优化处理
 
 ### 官方组件支持：
 1. wx-button
