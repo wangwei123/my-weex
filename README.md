@@ -20,6 +20,11 @@
 1. wx-tab
 2. wx-tab-item
 
+### 页面截图:
+![首页](https://github.com/wangwei123/my-weex/blob/master/preview_images/76C44C53-B7A3-4331-B823-25EA7CB9974E.png)
+
+![tab切换](https://github.com/wangwei123/my-weex/blob/master/preview_images/4AF6D7F5-66A9-4F88-AD20-4048C97568B1.png)
+
 ## 项目启动
 
 1. git clone https://github.com/wangwei123/my-weex
@@ -54,7 +59,7 @@ weexpack run android
 ### h5 启动方式
 
 打开 [http://localhost:8080/web/index.html](http://localhost:8080/web/index.html)
- 
+
 或者：
 
 ```
