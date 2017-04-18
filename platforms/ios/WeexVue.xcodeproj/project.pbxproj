@@ -93,7 +93,6 @@
 		0E93F4791E691E89009FFDEC /* WXImgLoaderDefaultImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXImgLoaderDefaultImpl.m; sourceTree = "<group>"; };
 		399F59A0DD74AB10E08F3C40 /* libPods-WeexVue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeexVue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AA193E81E9A0EAA002CCB03 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4ACFABF31E99DF4200599C0F /* IpDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpDefine.h; sourceTree = "<group>"; };
 		4ACFAC171E9A081C00599C0F /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		4AEEC77F1E89843000033E2D /* bundlejs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundlejs; sourceTree = "<group>"; };
 		524C569D3E6AC74034584D2D /* Pods-WeexVue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeexVue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeexVue/Pods-WeexVue.debug.xcconfig"; sourceTree = "<group>"; };
@@ -155,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				4AA193E81E9A0EAA002CCB03 /* Info.plist */,
-				4ACFABF31E99DF4200599C0F /* IpDefine.h */,
 				0E93F4711E691E89009FFDEC /* AppDefine.h */,
 				0E93F4721E691E89009FFDEC /* AppDelegate.h */,
 				0E93F4731E691E89009FFDEC /* AppDelegate.m */,

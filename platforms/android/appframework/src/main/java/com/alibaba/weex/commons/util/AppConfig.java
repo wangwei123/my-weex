@@ -2,6 +2,8 @@ package com.alibaba.weex.commons.util;
 
 import android.content.Context;
 
+import com.alibaba.weex.constants.Env;
+
 
 /**
  * Created by budao on 2016/10/12.
@@ -18,7 +20,7 @@ public class AppConfig {
     if (isLaunchLocally()) {
       return sPreferences.getString("local_url", "file://assets/index.js");
     }
-    return sPreferences.getString("launch_url", "http://127.0.0.1:8080/dist/index.js");
+    return sPreferences.getString("launch_url", Env.BUNDLE_URL);
   }
 
   public static Boolean isLaunchLocally() {

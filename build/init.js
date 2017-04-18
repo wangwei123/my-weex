@@ -17,17 +17,21 @@ let indexURL = `http://${ip}:8080/dist/weex/App.js`
 let androidIndexURL = argv._[0] === 'local' ? 'weex/App.js' : indexURL
 
 // android 主机地址操作
-let androidConfigFile = path.join(__dirname, '../android.config.json')
+let androidConfigFile = path.join(__dirname, '../platforms/android/appframework/src/main/java/com/alibaba/weex/constants/Env.java')
 let androidConfig =
   `
-{
-  "AppName": "WeexVue",
-  "AppId": "com.yueting.weex",
-  "SplashText": "HelloWeex",
-  "WeexBundle": "${androidIndexURL}"
+package com.alibaba.weex.constants;
+
+/**
+ * Created by wangwei on 2017/4/18.
+ */
+
+public class Env {
+    public static final String BUNDLE_URL = "${androidIndexURL}";
 }
 
 `
+
 fs.writeFile(androidConfigFile, androidConfig, function (err) {
   if (err) {
     throw err

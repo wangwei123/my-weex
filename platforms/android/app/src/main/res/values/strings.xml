@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WeexApp</string>
+    <string name="app_name">WeexVue</string>
     <string name="dummy_content">HelloWeex</string>
     <string name="capture_qrcode_prompt">请将条码置于取景框内扫描</string>
     <string name="cpu_not_support_tip">Sorry, your current device is x86 architecture.\n We only
