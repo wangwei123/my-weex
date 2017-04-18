@@ -23,29 +23,27 @@ fork自weexframe，将weex官方的.we组件修改为.vue组件，并开发了�
 1. git clone https://github.com/wangwei123/weex-vue
 2. cd weex-vue
 3. 安装weexpack
-
 ```
 npm install -g weexpack
 ```
 
 4. npm install
-5. 设置调试环境
+5. 开发模式启动
 ```
-// 调试本地serve
-npm run init serve
-// 调试assets或者jsbundle文件
-npm run init local
+ ./serve-start
 ```
-6. 执行 ./start
-
-### android 启动
+6. 本地文件模式启动
+```
+./local-start
+```
+### iOS 运行
+```
+//需安装pod依赖工具
+weexpack run ios
+```
+### android 运行
 ```
 weexpack run android
-```
-
-### iOS 启动
-```
-weexpack run ios
 ```
 
 ### h5 启动方式
