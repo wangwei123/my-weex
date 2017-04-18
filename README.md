@@ -21,9 +21,8 @@
 2. wx-tab-item
 
 ### 页面截图:
-![首页](https://github.com/wangwei123/my-weex/blob/master/preview_images/76C44C53-B7A3-4331-B823-25EA7CB9974E.png)
-
-![tab切换](https://github.com/wangwei123/my-weex/blob/master/preview_images/4AF6D7F5-66A9-4F88-AD20-4048C97568B1.png)
+ <img src="https://github.com/wangwei123/my-weex/blob/master/preview_images/76C44C53-B7A3-4331-B823-25EA7CB9974E.png" width="70%" alt=""/>
+<img src="https://github.com/wangwei123/my-weex/blob/master/preview_images/4AF6D7F5-66A9-4F88-AD20-4048C97568B1.png" width="70%" alt=""/>
 
 ## 项目启动
 
