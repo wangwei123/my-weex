@@ -35,20 +35,18 @@
 
 <script>
     module.exports = {
-      data: {
-        index: 0,
-        title: '',
-        titleColor: '#000000',
-        icon: '',
-        backgroundColor: '#ffffff'
+      props: {
+        index: {default: 0},
+        title: {default: ''},
+        titleColor: {default: '#000000'},
+        icon: {default: ''},
+        backgroundColor: {default: '#ffffff'}
       },
       methods: {
-        onclickitem: function (e) {
-          let vm = this
-          let params = {
-            index: vm.index
-          }
-          vm.$dispatch('tabItem.onClick', params)
+        onclickitem (e) {
+          this.$emit('tabItemOnClick', {
+            index: this.index
+          })
         }
       }
     }

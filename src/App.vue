@@ -1,6 +1,6 @@
 <template>
   <div style="flex-direction: column;">
-    <osc-tabbar :tabItems="tabItems" @tabBarOnClick="tabBarOnClick"></osc-tabbar>
+    <wx-tabbar :tabItems="tabItems" @tabBarOnClick="tabBarOnClick"></wx-tabbar>
   </div>
 </template>
 

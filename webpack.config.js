@@ -26,8 +26,6 @@ function getEntryFileContent(entryPath, vueFilePath) {
 const App = require("${relativePath}")
 
 // 全局注册组件
-Vue.component('osc-tabbar', require("components/osc-tabbar"))
-Vue.component('osc-tabitem', require("components/osc-tabitem"))
 Vue.component('wx-button', require("components/wx-button"))
 Vue.component('wx-countdown', require("components/wx-countdown"))
 Vue.component('wx-hn', require("components/wx-hn"))

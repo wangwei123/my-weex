@@ -2,8 +2,6 @@ import App from './App.web.vue'
 import router from 'router'
 import VueProgressBar from 'vue-progressbar'
 
-Vue.component('osc-tabbar', require('components/osc-tabbar'))
-Vue.component('osc-tabitem', require('components/osc-tabitem'))
 Vue.component('wx-button', require('components/wx-button'))
 Vue.component('wx-countdown', require('components/wx-countdown'))
 Vue.component('wx-hn', require('components/wx-hn'))
