@@ -1,5 +1,7 @@
-## weex-vue
-fork自weexframe，将weex官方的.we组件修改为.vue组件，并开发了一些其他组件.
+## my-weex
+1. 基于weex和vue2.0，支持weex和weexpack构建工具.
+2. 将weex官方的.we组件修改为.vue组件，并开发了一些其他组件
+3. 对组件在iOS和android平台的兼容性做了优化处理
 
 ### 官方组件支持：
 1. wx-button
@@ -20,15 +22,18 @@ fork自weexframe，将weex官方的.we组件修改为.vue组件，并开发了�
 
 ## 项目启动
 
-1. git clone https://github.com/wangwei123/weex-vue
-2. cd weex-vue
+1. git clone https://github.com/wangwei123/my-weex
+2. cd my-weex
 3. 安装weexpack
 ```
 npm install -g weexpack
 ```
 
-4. npm install
-5. 开发模式启动
+4. 安装依赖包
+```
+npm install
+```
+5. 开发调试模式启动
 ```
  ./serve-start
 ```
