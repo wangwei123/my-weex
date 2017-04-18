@@ -22,15 +22,18 @@
 
 ## 项目启动
 
-1. git clone https://github.com/wangwei123/weex-vue
-2. cd weex-vue
+1. git clone https://github.com/wangwei123/my-weex
+2. cd my-weex
 3. 安装weexpack
 ```
 npm install -g weexpack
 ```
 
-4. npm install
-5. 开发模式启动
+4. 安装依赖包
+```
+npm install
+```
+5. 开发调试模式启动
 ```
  ./serve-start
 ```
