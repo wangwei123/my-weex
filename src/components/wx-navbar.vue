@@ -1,5 +1,5 @@
 <template>
-    <div class="container" :style="{height: height, backgroundColor: backgroundColor}" :data-role="dataRole">
+    <div :style="style" :data-role="dataRole">
         <text class="right-text" :style="{color: rightItemColor}" navi-item-position="right" v-if="!rightItemSrc" onclick = "onclickrightitem">{{rightItemTitle}}</text>
         <image class="right-image" navi-item-position="right" :src="rightItemSrc" v-if="rightItemSrc" onclick="onclickrightitem"></image>
         <text class="left-text" :style="{color: leftItemColor}" navi-item-position="left" v-if="!leftItemSrc" onclick= "onclickleftitem">{{leftItemTitle}}</text>
@@ -9,14 +9,6 @@
 </template>
 
 <style scoped>
-    .container {
-        flex-direction: row;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 750;
-    }
     .right-text {
         position: absolute;
         bottom: 28;
@@ -59,11 +51,13 @@
 </style>
 
 <script>
+  const modal = weex.requireModule('modal')
   module.exports = {
     props: {
       dataRole: { default: 'navbar' },
       //导航条背景色
       backgroundColor: { default: 'black' },
+      top: { default: 0 },
       //导航条高度
       height: { default: 88 },
       //导航条标题
@@ -82,6 +76,28 @@
       leftItemTitle: { default: '' },
       //左侧按钮颜色
       leftItemColor: { default: 'black' }
+    },
+    created: function() {
+      let env = this.$getConfig().env
+      if(env.platform == 'iOS') {
+        this.top = 0
+      } else {
+        this.top = -40
+      }
+    },
+    computed: {
+      style () {
+        return {
+          height: this.height,
+          backgroundColor: this.backgroundColor,
+          flexDirection: 'row',
+          position: 'fixed',
+          top: this.top,
+          left: 0,
+          right: 0,
+          width: 750
+        }
+      }
     },
     methods: {
       onclickrightitem: function (e) {

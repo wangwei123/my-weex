@@ -13,7 +13,7 @@
         :right-item-title="rightItemTitle"
         :right-item-color="rightItemColor">
       </wx-navbar>
-  	  <div class="wrapper" :style="{marginTop: height}">
+  	  <div class="wrapper" :style="{marginTop: marginTop}">
   		    <slot></slot>
   	  </div>
   	</div>
@@ -29,7 +29,7 @@
   		width: 750;
   	}
     .navbar {
-      margin-top:40px;
+      margin-top:40;
     }
 </style>
 
@@ -50,6 +50,14 @@
         leftItemSrc: { default: '' },
         leftItemTitle: { default: '' },
         leftItemColor: { default: 'black' }
+      },
+      created () {
+        let env = this.$getConfig().env
+        if (env.platform == 'iOS') {
+          this.marginTop = 88
+        } else {
+          this.marginTop = 48
+        }
       }
     }
 </script>

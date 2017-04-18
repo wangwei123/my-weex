@@ -73,7 +73,7 @@
           timingFunction: 'ease',
           delay: 0 //ms
         }, function () {
-          modal.toast({ message: 'animation finished.' })
+          // modal.toast({ message: 'animation finished.' })
         })
       }
     }

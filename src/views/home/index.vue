@@ -1,5 +1,5 @@
 <template>
-  <wx-navpage class="wx-navpage" data-role="none" :height="navBarHeight" background-color="#FF4500" :title="title" title-color="white" right-item-src="http://gtms02.alicdn.com/tps/i2/TB1ED7iMpXXXXXEXXXXWA_BHXXX-48-48.png">
+  <wx-navpage class="wx-navpage" data-role="none" background-color="#FF4500" :title="title" title-color="white" right-item-src="http://gtms02.alicdn.com/tps/i2/TB1ED7iMpXXXXXEXXXXWA_BHXXX-48-48.png">
    <wx-tab v-model="index"
     fontSize="28"
     height="70"
@@ -12,8 +12,8 @@
       <wx-tab-item @onItemClick="myhandler(3)">H5游戏</wx-tab-item>
   </wx-tab>
 
-  <scroller :style="{width: 750, height: scrollerHeight}" scroll-direction="horizontal">
-    <list ref="tab0" tabIndex="0" class="list" @loadmore="fetch" loadmoreoffset="10">
+  <scroller scroll-direction="horizontal">
+    <list ref="tab0"  class="list" @loadmore="fetch" loadmoreoffset="10">
       <cell class="cell">
         <div style="flex-direction:row;margin-top:10px;margin-bottom:10px;">
           <image style="width:100px;height:100px;margin-left:20px;" src="http://f1.img4399.com/ma~a_26444~105x105?1490663772"></image>
@@ -45,7 +45,7 @@
         </div>
       </cell>
     </list>
-    <list ref="tab1" tabIndex="1" class="list" @loadmore="fetch" loadmoreoffset="10">
+    <list ref="tab1" class="list" @loadmore="fetch" loadmoreoffset="10">
       <cell class="cell" v-for="num in lists">
         <div class="panel">
           <text class="text">text{{num}}</text>
@@ -66,7 +66,7 @@
         </div>
       </cell>
     </list>
-    </scroller>
+  </scroller>
  </wx-navpage>
 </template>
 
@@ -78,6 +78,7 @@
 }
 .list {
   width: 750;
+  height: 960;
 }
 .panel {
    width: 600px;
@@ -109,18 +110,19 @@
       scrollerHeight: 1050,
       navBarHeight: 88,
       title: '游戏盒子',
-      lists: [1, 2, 3, 4, 5]
+      lists: [1, 2, 3, 4, 5],
+      showTabIndex: 0
     },
     created: function() {
-      this.$getConfig(function (config) {
-        let env = config.env
-        if(env.platform == 'iOS') {
-          let scale = env.scale
-          let deviceWidth = env.deviceWidth / scale
-          this.navBarHeight = 64.0 * 750.0 / deviceWidth
-          this.scrollerHeight = env.deviceHeight - this.navBarHeight - 77
-        }
-      }.bind(this))
+      let env = this.$getConfig().env
+      let scale = env.scale
+      let deviceWidth = env.deviceWidth / scale
+      if(env.platform == 'iOS') {
+        this.scrollerHeight = env.deviceHeight - this.navBarHeight - 77
+      } else {
+        this.scrollerHeight = env.deviceHeight - this.navBarHeight
+      }
+
       this.$on('naviBar.rightItem.click', function(e) {
         duration = 2
         this.$call('modal', 'toast', {
@@ -140,7 +142,7 @@
       myhandler: function(index) {
         const el = this.$refs['tab' + index]
         dom.scrollToElement(el, {})
-        // modal.alert({'message': 'test'})
+        // modal.alert({'message': 'test' + index})
       },
       fetch (event) {
         modal.toast({ message: 'loadmore', duration: 1 })
